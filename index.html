@@ -21,6 +21,9 @@
   --text-muted: #8A7A9C;
   --card-shadow: 0 4px 24px rgba(91,45,142,0.08);
   --card-hover: 0 8px 36px rgba(91,45,142,0.14);
+  --red-alert: #D32F2F;
+  --amber-alert: #F9A825;
+  --green-safe: #2E7D32;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -51,6 +54,9 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
 @keyframes bounce { 0%,100% { transform: translateY(0) translateX(-50%); opacity: 0.4; } 50% { transform: translateY(8px) translateX(-50%); opacity: 0.9; } }
 .scroll-indicator { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); animation: bounce 2.5s ease-in-out infinite; cursor: pointer; }
 
+.freshness-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.65); font-size: 11px; font-weight: 500; padding: 6px 14px; border-radius: 50px; margin-top: 24px; letter-spacing: 0.02em; }
+.freshness-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #4CAF50; }
+
 .wave-divider { width: 100%; overflow: hidden; line-height: 0; }
 .wave-divider svg { display: block; width: 100%; height: 80px; }
 .wave-purple svg { fill: var(--purple-soft); }
@@ -65,6 +71,26 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
 .metric-value { font-size: 40px; font-weight: 800; color: var(--purple); margin-bottom: 6px; }
 .metric-value.gold { color: var(--gold); }
 .metric-label { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+.health-section { padding: 40px 24px 70px; background: var(--purple-soft); }
+.health-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 16px; }
+.health-card { background: var(--white); border-radius: 16px; padding: 28px 24px; text-align: center; box-shadow: var(--card-shadow); border-top: 4px solid transparent; transition: transform 0.3s, box-shadow 0.3s; }
+.health-card:hover { transform: translateY(-4px); box-shadow: var(--card-hover); }
+.health-card.active { border-top-color: var(--green-safe); }
+.health-card.at-risk { border-top-color: var(--amber-alert); }
+.health-card.dormant { border-top-color: var(--red-alert); }
+.health-count { font-size: 42px; font-weight: 800; margin-bottom: 4px; }
+.health-card.active .health-count { color: var(--green-safe); }
+.health-card.at-risk .health-count { color: var(--amber-alert); }
+.health-card.dormant .health-count { color: var(--red-alert); }
+.health-pct { font-size: 14px; color: var(--text-muted); font-weight: 600; margin-bottom: 8px; }
+.health-label { font-size: 13px; color: var(--text-body); line-height: 1.6; }
+.health-bar { display: flex; height: 10px; border-radius: 5px; overflow: hidden; max-width: 600px; margin: 0 auto; }
+.health-bar div { height: 100%; }
+.health-bar .bar-active { background: var(--green-safe); }
+.health-bar .bar-risk { background: var(--amber-alert); }
+.health-bar .bar-dormant { background: var(--red-alert); }
+.health-total { text-align: center; margin-top: 10px; font-size: 13px; color: var(--text-muted); }
 
 .evidence-section { padding: 80px 24px; background: var(--white); }
 .section-title { text-align: center; font-size: clamp(30px, 4.5vw, 44px); font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
@@ -104,6 +130,28 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
 .kpi-value { font-size: 26px; font-weight: 800; color: var(--purple); }
 .kpi-value small { font-size: 14px; color: var(--text-muted); font-weight: 500; }
 
+.supply-section { padding: 60px 24px; background: var(--cream); }
+.supply-alert { max-width: 1100px; margin: 0 auto; background: var(--white); border-radius: 16px; padding: 32px; box-shadow: var(--card-shadow); border-left: 4px solid var(--red-alert); }
+.supply-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.supply-header svg { flex-shrink: 0; }
+.supply-header h3 { font-size: 18px; font-weight: 700; color: var(--text-dark); }
+.supply-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+.supply-stat { text-align: center; padding: 16px; border-radius: 12px; }
+.supply-stat.critical { background: #FFEBEE; }
+.supply-stat.monitor { background: #FFF8E1; }
+.supply-stat.safe { background: #E8F5E9; }
+.supply-stat .stat-num { font-size: 32px; font-weight: 800; margin-bottom: 4px; }
+.supply-stat.critical .stat-num { color: var(--red-alert); }
+.supply-stat.monitor .stat-num { color: var(--amber-alert); }
+.supply-stat.safe .stat-num { color: var(--green-safe); }
+.supply-stat .stat-label { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+.supply-detail { font-size: 14px; color: var(--text-body); line-height: 1.8; }
+.supply-detail strong { color: var(--red-alert); }
+.supply-sku-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.supply-sku { display: inline-block; padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+.supply-sku.critical { background: #FFEBEE; color: var(--red-alert); }
+.supply-sku.monitor { background: #FFF8E1; color: #E65100; }
+
 .closing-section { padding: 120px 24px; text-align: center; background: linear-gradient(160deg, var(--purple-deep) 0%, var(--purple) 60%, var(--purple-light) 100%); position: relative; overflow: hidden; }
 .closing-content { position: relative; z-index: 2; max-width: 680px; margin: 0 auto; }
 .closing-headline { font-size: clamp(32px, 5vw, 52px); font-weight: 800; color: white; margin-bottom: 20px; line-height: 1.15; }
@@ -115,7 +163,7 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
 .glossary-section { padding: 60px 24px; background: var(--purple-soft); }
 .glossary-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 40px; max-width: 1100px; margin: 0 auto; }
 .glossary-item { display: flex; gap: 12px; align-items: baseline; }
-.glossary-term { font-weight: 700; color: var(--purple); font-size: 13px; min-width: 140px; flex-shrink: 0; }
+.glossary-term { font-weight: 700; color: var(--purple); font-size: 13px; min-width: 160px; flex-shrink: 0; }
 .glossary-def { font-size: 13px; color: var(--text-body); line-height: 1.65; }
 @media (max-width: 768px) { .glossary-grid { grid-template-columns: 1fr; } }
 
@@ -125,7 +173,60 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
 .powerbi-frame { position: relative; width: 100%; padding-bottom: 62.25%; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 40px rgba(91,45,142,0.12); border: 2px solid var(--purple-bg); background: var(--white); }
 .powerbi-frame iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 14px; }
 
-@media (max-width: 900px) { .metrics-grid, .challenge-grid { grid-template-columns: repeat(2, 1fr); } .evidence-grid { grid-template-columns: 1fr; } .chart-row { grid-template-columns: 1fr; } .kpi-row { grid-template-columns: 1fr; } }
+.family-section { padding: 40px 24px 60px; background: var(--white); }
+.family-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; max-width: 1100px; margin: 0 auto; }
+.family-card { text-align: center; padding: 20px 8px; border-radius: 12px; background: var(--purple-soft); transition: transform 0.2s; }
+.family-card:hover { transform: translateY(-3px); }
+.family-name { font-size: 14px; font-weight: 700; color: var(--purple); margin-bottom: 4px; }
+.family-pct { font-size: 22px; font-weight: 800; color: var(--text-dark); }
+.family-role { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+@media (max-width: 768px) { .family-grid { grid-template-columns: repeat(4, 1fr); } }
+
+/* Model Guide Section */
+.guide-section { padding: 80px 24px; background: var(--white); }
+.guide-flow { display: flex; align-items: center; justify-content: center; gap: 0; margin-bottom: 48px; flex-wrap: wrap; }
+.flow-step { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 16px 12px; min-width: 140px; }
+.flow-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; font-size: 20px; font-weight: 800; color: white; }
+.flow-icon.p1 { background: var(--purple); }
+.flow-icon.p7 { background: var(--purple-light); }
+.flow-icon.p8 { background: var(--gold); }
+.flow-icon.p9 { background: var(--red-alert); }
+.flow-icon.p10 { background: var(--green-safe); }
+.flow-name { font-size: 13px; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
+.flow-desc { font-size: 11px; color: var(--text-muted); max-width: 130px; }
+.flow-arrow { font-size: 20px; color: var(--purple-bg); margin: 0 4px; padding-top: 0; font-weight: 300; }
+
+.guide-cards { display: flex; flex-direction: column; gap: 16px; max-width: 1100px; margin: 0 auto; }
+.guide-card { border: 1px solid var(--purple-bg); border-radius: 16px; overflow: hidden; transition: box-shadow 0.3s; }
+.guide-card:hover { box-shadow: var(--card-shadow); }
+.guide-header { display: flex; align-items: center; gap: 16px; padding: 20px 24px; cursor: pointer; user-select: none; background: var(--white); transition: background 0.2s; }
+.guide-header:hover { background: var(--purple-soft); }
+.guide-header .guide-num { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; color: white; flex-shrink: 0; }
+.guide-header .guide-title-wrap { flex: 1; }
+.guide-header .guide-card-title { font-size: 17px; font-weight: 700; color: var(--text-dark); }
+.guide-header .guide-card-sub { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+.guide-header .guide-toggle { font-size: 20px; color: var(--purple-light); transition: transform 0.3s; flex-shrink: 0; font-weight: 300; }
+.guide-card.open .guide-toggle { transform: rotate(180deg); }
+.guide-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.guide-card.open .guide-body { max-height: 2000px; }
+.guide-inner { padding: 0 24px 24px 80px; }
+.guide-inner p { font-size: 14px; color: var(--text-body); line-height: 1.85; margin-bottom: 14px; }
+.guide-inner strong { color: var(--purple-deep); }
+.guide-snapshot { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 16px 0; }
+.guide-snap-card { background: var(--purple-soft); border-radius: 10px; padding: 14px 16px; text-align: center; }
+.guide-snap-val { font-size: 22px; font-weight: 800; color: var(--purple); }
+.guide-snap-label { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.guide-insight { background: var(--cream); border-radius: 10px; padding: 16px 18px; margin-top: 12px; border-left: 3px solid var(--gold); }
+.guide-insight-title { font-size: 13px; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
+.guide-insight p { font-size: 13px; margin-bottom: 0; }
+
+.guide-concepts { max-width: 1100px; margin: 40px auto 0; }
+.concept-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.concept-card { background: var(--purple-soft); border-radius: 12px; padding: 20px; }
+.concept-name { font-size: 14px; font-weight: 700; color: var(--purple); margin-bottom: 6px; }
+.concept-desc { font-size: 13px; color: var(--text-body); line-height: 1.7; }
+
+@media (max-width: 900px) { .metrics-grid, .challenge-grid { grid-template-columns: repeat(2, 1fr); } .evidence-grid { grid-template-columns: 1fr; } .chart-row { grid-template-columns: 1fr; } .kpi-row { grid-template-columns: 1fr; } .health-grid { grid-template-columns: 1fr; } .supply-grid { grid-template-columns: 1fr; } .guide-inner { padding-left: 24px; } .concept-grid { grid-template-columns: 1fr; } .flow-arrow { display: none; } .guide-flow { gap: 8px; } }
 @media (max-width: 580px) { .metrics-grid, .challenge-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
@@ -142,12 +243,13 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
     <div class="h-dot-2 float-a"></div>
   </div>
   <div class="hero-content">
-    <div class="hero-logo">a2 Milk<span>®</span> Vietnam | Livewell Distribution</div>
-    <div class="hero-eyebrow">FY2026 Performance &amp; FY2027 Forecast — a2 Milk Direct (Livewell)</div>
-    <h1 class="hero-title">FY2026 at <em>426B VND</em><br>and accelerating</h1>
-    <p class="hero-subtitle">The a2 Milk contract target of 303B VND already exceeded by 34% — with three months still to close (Apr–Jun 2026). 140 first-time customers driving 35% of revenue. Three FY2027 growth scenarios ready for leadership decision.</p>
+    <div class="hero-logo">a2 Milk<span>&reg;</span> Vietnam | Livewell Distribution</div>
+    <div class="hero-eyebrow">FY2026 Performance &amp; FY2027 Forecast &mdash; a2 Milk Direct (Livewell)</div>
+    <h1 class="hero-title">FY2026 at <em>427B VND</em><br>and accelerating</h1>
+    <p class="hero-subtitle">The a2 Milk contract target of 303B VND already exceeded &mdash; 350B actual to date with two months still to close (May&ndash;Jun 2026). 140 first-time customers driving 35% of revenue. Four FY2027 growth scenarios ready for leadership decision.</p>
     <a href="#metrics" class="btn-primary hero-cta">Explore the Evidence</a>
     <a href="#challenges" class="btn-outline hero-cta">View Scenarios</a>
+    <div class="freshness-badge"><span class="dot"></span> Data as of 29 April 2026</div>
   </div>
   <div class="scroll-indicator">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><path d="M7 10l5 5 5-5"/></svg>
@@ -159,11 +261,42 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
 <section class="metrics-section" id="metrics">
   <div class="section-center">
     <div class="metrics-grid">
-      <div class="metric-card"><div class="metric-value">426B</div><div class="metric-label">FY2026 full-year forecast (VND)<br>Updates daily as Apr–Jun invoices post</div></div>
-      <div class="metric-card"><div class="metric-value">+34%</div><div class="metric-label">Above a2 Milk contract target<br>326B actual to date vs 303B target</div></div>
-      <div class="metric-card"><div class="metric-value gold">140</div><div class="metric-label">First-time buyers in FY2026<br>31% of all 451 active accounts</div></div>
-      <div class="metric-card"><div class="metric-value gold">35.5%</div><div class="metric-label">Monthly revenue from first-time buyers<br>Growing every month — not a one-off</div></div>
+      <div class="metric-card"><div class="metric-value">427B</div><div class="metric-label">FY2026 full-year forecast (VND)<br>Updates daily as May&ndash;Jun invoices post</div></div>
+      <div class="metric-card"><div class="metric-value">+41%</div><div class="metric-label">Above a2 Milk contract target<br>Forecast 427B vs 303B annual commitment</div></div>
+      <div class="metric-card"><div class="metric-value gold">140</div><div class="metric-label">First-time buyers in FY2026<br>No prior A2M purchases before Jul 2025</div></div>
+      <div class="metric-card"><div class="metric-value gold">35.5%</div><div class="metric-label">Monthly revenue from first-time buyers<br>Growing every month &mdash; not a one-off</div></div>
     </div>
+  </div>
+</section>
+
+<!-- Customer Health Section -->
+<section class="health-section" id="health">
+  <div class="section-center">
+    <h2 class="section-title" style="font-size: 28px; margin-bottom: 8px;">Customer portfolio health</h2>
+    <p class="section-subtitle" style="margin-bottom: 36px;">599 direct customers segmented by purchase frequency. Active = buying at healthy pace. At Risk = frequency slowing. Dormant = inactive.</p>
+    <div class="health-grid">
+      <div class="health-card active">
+        <div class="health-count">231</div>
+        <div class="health-pct">39% of total</div>
+        <div class="health-label">Active &mdash; healthy purchase frequency, core of the FY2027 forecast</div>
+      </div>
+      <div class="health-card at-risk">
+        <div class="health-count">132</div>
+        <div class="health-pct">22% of total</div>
+        <div class="health-label">At Risk &mdash; still buying but slowing down, retention-adjusted in forecast</div>
+      </div>
+      <div class="health-card dormant">
+        <div class="health-count">236</div>
+        <div class="health-pct">39% of total</div>
+        <div class="health-label">Dormant &mdash; inactive, zeroed out of FY2027. Re-activating any is pure upside</div>
+      </div>
+    </div>
+    <div class="health-bar">
+      <div class="bar-active" style="width: 39%;"></div>
+      <div class="bar-risk" style="width: 22%;"></div>
+      <div class="bar-dormant" style="width: 39%;"></div>
+    </div>
+    <div class="health-total">599 direct customers (KH/KR accounts) &mdash; forecast covers Active + At Risk only</div>
   </div>
 </section>
 
@@ -172,27 +305,27 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
 <section class="evidence-section">
   <div class="section-center">
     <h2 class="section-title">Why we believe this growth is real</h2>
-    <p class="section-subtitle">Four data points that confirm FY2026 performance is structural — and sustainable into FY2027.</p>
+    <p class="section-subtitle">Four data points that confirm FY2026 performance is structural &mdash; and sustainable into FY2027.</p>
     <div class="evidence-grid">
       <div class="evidence-card">
         <div class="evidence-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#5B2D8E" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div>
         <div class="evidence-name">Consistent account acquisition</div>
-        <div class="evidence-desc">46 first-time buyers onboarded at FY2026 launch (Jul 2025), with steady 4–16 new first-time buyers every month since. Total: 140 accounts across 10 months. Acquisition is not front-loaded or seasonal — the pipeline has been active every single month.</div>
+        <div class="evidence-desc">46 first-time buyers onboarded at FY2026 launch (Jul 2025), with steady 4&ndash;16 new first-time buyers every month since. Total: 140 accounts across 10 months. Acquisition is not front-loaded or seasonal &mdash; the pipeline has been active every single month.</div>
       </div>
       <div class="evidence-card">
         <div class="evidence-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#5B2D8E" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 3v18"/></svg></div>
         <div class="evidence-name">March 55.7B VND was broad-based</div>
-        <div class="evidence-desc">Breakdown: 40.2B from accounts buying since before FY2026 (72%), 9.0B from accounts started 3–6 months prior (16%), 6.5B from accounts started within last 3 months (12%). Not one large order — revenue accelerated across all customer tiers simultaneously.</div>
+        <div class="evidence-desc">Breakdown: 40.2B from accounts buying since before FY2026 (72%), 9.0B from accounts started 3&ndash;6 months prior (16%), 6.5B from accounts started within last 3 months (12%). Not one large order &mdash; revenue accelerated across all customer tiers simultaneously.</div>
       </div>
       <div class="evidence-card">
         <div class="evidence-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#5B2D8E" stroke-width="2"><path d="M4 18L9 12 14 15 20 6"/><circle cx="9" cy="12" r="1.5" fill="#5B2D8E"/><circle cx="14" cy="15" r="1.5" fill="#5B2D8E"/><circle cx="20" cy="6" r="1.5" fill="#5B2D8E"/></svg></div>
         <div class="evidence-name">First-time buyers outperform existing</div>
-        <div class="evidence-desc">Accounts that joined in FY2026 average 119M VND/month each — 22% higher than accounts that were already buying before FY2026 (97M VND/month each). Every new account added is contributing more revenue than the average existing account.</div>
+        <div class="evidence-desc">Accounts that joined in FY2026 average 119M VND/month each &mdash; 22% higher than accounts that were already buying before FY2026 (97M VND/month each). Every new account added is contributing more revenue than the average existing account.</div>
       </div>
       <div class="evidence-card">
         <div class="evidence-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#5B2D8E" stroke-width="2"><path d="M6 18V10M10 18V7M14 18V12M18 18V5"/><line x1="4" y1="18" x2="20" y2="18"/></svg></div>
-        <div class="evidence-name">Contract target exceeded by +34%</div>
-        <div class="evidence-desc">The agreed annual target between Livewell and a2 Milk was 303B VND for FY2026. Actual revenue to date is 326B — already above target with three months (Apr, May, Jun) remaining. Full-year projection: approximately 426B VND, or 40% above the original commitment.</div>
+        <div class="evidence-name">Contract target exceeded by +41%</div>
+        <div class="evidence-desc">The agreed annual target between Livewell and a2 Milk was 303B VND for FY2026. Actual revenue to date is 350B &mdash; already 15% above the full-year target with two months (May, Jun) remaining. Full-year projection: 427B VND, or 41% above the original commitment.</div>
       </div>
     </div>
   </div>
@@ -202,11 +335,11 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
 
 <section class="chart-section">
   <div class="section-center">
-    <h2 class="section-title" style="margin-bottom: 40px;">10 months of data — the trajectory speaks</h2>
+    <h2 class="section-title" style="margin-bottom: 40px;">10 months of data &mdash; the trajectory speaks</h2>
     <div class="chart-row">
       <div class="chart-box">
-        <div class="chart-title">New account acquisition by month</div>
-        <div class="chart-subtitle">FY2026: Jul 2025 – Apr 2026 | 140 accounts in 10 months — consistent, not front-loaded</div>
+        <div class="chart-title">First-time buyer acquisition by month</div>
+        <div class="chart-subtitle">FY2026: Jul 2025 &ndash; Apr 2026 | 140 accounts in 10 months &mdash; consistent, not front-loaded</div>
         <div class="chart-wrap"><canvas id="acqChart"></canvas></div>
       </div>
       <div class="chart-box">
@@ -216,16 +349,16 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
       </div>
     </div>
     <div class="chart-box" style="margin-bottom: 28px;">
-      <div class="chart-title">Monthly revenue: 15.5B to 55.7B — the FY2026 growth curve</div>
-      <div class="chart-subtitle">Gold = new FY2026 accounts, Purple = established base. Both layers accelerating together.</div>
+      <div class="chart-title">Monthly revenue: 15.5B to 55.7B &mdash; the FY2026 growth curve</div>
+      <div class="chart-subtitle">Gold = first-time FY2026 buyers, Purple = established base. Both layers accelerating together.</div>
       <div class="chart-wrap" style="height: 280px;"><canvas id="trendChart"></canvas></div>
     </div>
     <div class="verdict-box">
-      <div class="verdict-title">Bottom line: FY2026 is not a peak — it is the new floor</div>
+      <div class="verdict-title">Bottom line: FY2026 is not a peak &mdash; it is the new floor</div>
       <div class="verdict-text">
-        Monthly revenue grew from <strong>15.5B in July 2025 to 55.7B in March 2026</strong> — a 3.6x increase within a single fiscal year. 140 new accounts now generate <strong>35.5% of monthly revenue</strong> at a higher per-account rate than the established base. The contract target of 303B was exceeded three months early.
+        Monthly revenue grew from <strong>15.5B in July 2025 to 55.7B in March 2026</strong> &mdash; a 3.6x increase within a single fiscal year. 140 first-time buyers now generate <strong>35.5% of monthly revenue</strong> at a higher per-account rate than the established base. The contract target of 303B was exceeded with two months still remaining.
         <br><br>
-        <strong>What this means for FY2027:</strong> The 426B FY2026 forecast is built on broad, diversified growth — not a single account or product push. All three FY2027 scenarios — from +1.9% to +67.1% year-over-year growth — are anchored to this confirmed base. As April through June actuals load, both the baseline and all targets update automatically in the live model.
+        <strong>What this means for FY2027:</strong> The 427B FY2026 forecast is built on broad, diversified growth &mdash; not a single account or product push. All three FY2027 challenge targets &mdash; from +20.3% to +67.9% year-over-year growth &mdash; are anchored to this confirmed base. As May and June actuals load, both the baseline and all targets update automatically in the live model.
       </div>
     </div>
   </div>
@@ -236,33 +369,291 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
 <section class="challenge-section" id="challenges">
   <div class="section-center">
     <h2 class="section-title">FY2027 growth scenarios</h2>
-    <p class="section-subtitle">Three targets anchored to FY2026 performance (426B). As April–June actuals load, both the baseline and targets update automatically.</p>
+    <p class="section-subtitle">Three challenge targets anchored to FY2026 performance (427B). Volume-driven growth at current pricing. As May&ndash;June actuals load, both the baseline and all targets recalibrate automatically.</p>
     <div class="challenge-grid">
       <div class="ch-card">
         <div class="ch-label">Current pace</div>
-        <div class="ch-value">434B</div>
-        <div class="ch-factor">+1.9% vs FY2026 (426B)<br>No additional growth assumed</div>
+        <div class="ch-value">436B</div>
+        <div class="ch-factor">+2.2% vs FY2026 (427B)<br>No additional growth assumed</div>
       </div>
       <div class="ch-card">
         <div class="ch-label">Challenge I</div>
-        <div class="ch-value">510B</div>
-        <div class="ch-factor">+19.7% vs FY2026 (426B)<br>Sell more units, same pricing</div>
+        <div class="ch-value">513B</div>
+        <div class="ch-factor">+20.3% vs FY2026 (427B)<br>+26% volume growth, same pricing</div>
       </div>
       <div class="ch-card featured">
         <div class="ch-label">Challenge II</div>
-        <div class="ch-value">608B</div>
-        <div class="ch-factor">+42.7% vs FY2026 (426B)<br>Sell more units, same pricing</div>
+        <div class="ch-value">612B</div>
+        <div class="ch-factor">+43.4% vs FY2026 (427B)<br>+52% volume growth, same pricing</div>
       </div>
       <div class="ch-card">
         <div class="ch-label">Challenge III</div>
-        <div class="ch-value" style="color: var(--gold);">712B</div>
-        <div class="ch-factor">+67.1% vs FY2026 (426B)<br>Maximum volume push</div>
+        <div class="ch-value" style="color: var(--gold);">716B</div>
+        <div class="ch-factor">+67.9% vs FY2026 (427B)<br>+78% volume growth, maximum push</div>
       </div>
     </div>
     <div class="kpi-row">
-      <div class="kpi-card"><div class="kpi-label">FY2026 Forecast</div><div class="kpi-value">426B</div></div>
-      <div class="kpi-card"><div class="kpi-label">FY2027 Range</div><div class="kpi-value">434B<small> — </small>712B</div></div>
-      <div class="kpi-card"><div class="kpi-label">Year-over-Year Growth</div><div class="kpi-value">+1.9%<small> — </small>+67.1%</div></div>
+      <div class="kpi-card"><div class="kpi-label">FY2026 Forecast</div><div class="kpi-value">427B</div></div>
+      <div class="kpi-card"><div class="kpi-label">FY2027 Range</div><div class="kpi-value">436B<small> &mdash; </small>716B</div></div>
+      <div class="kpi-card"><div class="kpi-label">Year-over-Year Growth</div><div class="kpi-value">+2.2%<small> &mdash; </small>+67.9%</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Product Family Revenue Mix -->
+<section class="family-section">
+  <div class="section-center">
+    <h2 class="section-title" style="font-size: 24px; margin-bottom: 8px;">Revenue by product family</h2>
+    <p class="section-subtitle" style="margin-bottom: 28px;">Share of monthly weighted run rate (31.2B VND/month). Platinum dominates &mdash; concentration risk and growth engine in one.</p>
+    <div class="family-grid">
+      <div class="family-card"><div class="family-name">PL</div><div class="family-pct">~61%</div><div class="family-role">Platinum &mdash; core</div></div>
+      <div class="family-card"><div class="family-name">GG</div><div class="family-pct">~11%</div><div class="family-role">Gentle Gold</div></div>
+      <div class="family-card"><div class="family-name">WMP</div><div class="family-pct">~9%</div><div class="family-role">Whole Milk Powder</div></div>
+      <div class="family-card"><div class="family-name">UHT</div><div class="family-pct">~9%</div><div class="family-role">High volume, low price</div></div>
+      <div class="family-card"><div class="family-name">IMMU</div><div class="family-pct">~9%</div><div class="family-role">Immuno &mdash; growing</div></div>
+      <div class="family-card"><div class="family-name">MOM</div><div class="family-pct">~1%</div><div class="family-role">Specialist</div></div>
+      <div class="family-card"><div class="family-name">SMP</div><div class="family-pct">&lt;1%</div><div class="family-role">Specialist</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Supply Chain Alert -->
+<section class="supply-section">
+  <div class="supply-alert">
+    <div class="supply-header">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D32F2F" stroke-width="2"><path d="M12 2L2 22h20L12 2z"/><line x1="12" y1="10" x2="12" y2="14"/><circle cx="12" cy="18" r="0.5" fill="#D32F2F"/></svg>
+      <h3>Supply chain status &mdash; 29 April 2026</h3>
+    </div>
+    <div class="supply-grid">
+      <div class="supply-stat critical"><div class="stat-num">4</div><div class="stat-label">Critical (&lt; 1 month stock)</div></div>
+      <div class="supply-stat monitor"><div class="stat-num">5</div><div class="stat-label">Monitor (1&ndash;2.5 months)</div></div>
+      <div class="supply-stat safe"><div class="stat-num">6</div><div class="stat-label">Safe (&gt; 2.5 months)</div></div>
+    </div>
+    <div class="supply-detail">
+      <strong>Platinum family is the biggest risk</strong> &mdash; 4 of 5 PL SKUs are below 1-month coverage with zero in-transit. Immediate purchase order action required.
+    </div>
+    <div class="supply-sku-list">
+      <span class="supply-sku critical">PL1.400 &mdash; 0.6 mo</span>
+      <span class="supply-sku critical">PL3.900 &mdash; 0.7 mo</span>
+      <span class="supply-sku critical">PL1.900 &mdash; 0.9 mo</span>
+      <span class="supply-sku critical">MOM.900 &mdash; 0.1 mo</span>
+      <span class="supply-sku monitor">PL4.900 &mdash; 1.3 mo</span>
+      <span class="supply-sku monitor">SMP.1000 &mdash; 1.5 mo</span>
+      <span class="supply-sku monitor">PL2.900 &mdash; 1.6 mo</span>
+      <span class="supply-sku monitor">IMMU.900 &mdash; 1.8 mo</span>
+      <span class="supply-sku monitor">WMP.1000 &mdash; 2.4 mo</span>
+    </div>
+  </div>
+</section>
+
+<!-- Model Guide — How to Read the Power BI Report -->
+<section class="guide-section" id="model-guide">
+  <div class="section-center">
+    <h2 class="section-title">How to read the live model</h2>
+    <p class="section-subtitle">The Power BI report below has 5 interconnected pages. Each one answers a different business question. Here is what they show and what to look for &mdash; with today&rsquo;s live numbers.</p>
+
+    <!-- Flow Diagram -->
+    <div class="guide-flow">
+      <div class="flow-step">
+        <div class="flow-icon p1">P1</div>
+        <div class="flow-name">Executive Summary</div>
+        <div class="flow-desc">How are we doing?</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">
+        <div class="flow-icon p7">P7</div>
+        <div class="flow-name">Value Forecast</div>
+        <div class="flow-desc">Detailed FY27 projection</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">
+        <div class="flow-icon p8">P8</div>
+        <div class="flow-name">Volume Dashboard</div>
+        <div class="flow-desc">Revenue &rarr; physical units</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">
+        <div class="flow-icon p9">P9</div>
+        <div class="flow-name">Supply Chain</div>
+        <div class="flow-desc">Stock levels &amp; PO needs</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">
+        <div class="flow-icon p10">P10</div>
+        <div class="flow-name">Penetration</div>
+        <div class="flow-desc">Growth opportunities</div>
+      </div>
+    </div>
+
+    <!-- Page-by-page Guide Cards -->
+    <div class="guide-cards">
+
+      <!-- Page 1: Executive Summary -->
+      <div class="guide-card">
+        <div class="guide-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="guide-num" style="background: var(--purple);">P1</div>
+          <div class="guide-title-wrap">
+            <div class="guide-card-title">Executive Summary</div>
+            <div class="guide-card-sub">The 30-second leadership overview &mdash; performance, forecast, customer health</div>
+          </div>
+          <div class="guide-toggle">&darr;</div>
+        </div>
+        <div class="guide-body">
+          <div class="guide-inner">
+            <p><strong>What it answers:</strong> &ldquo;How is A2M Vietnam performing right now, and where is it heading?&rdquo; This is the first page anyone sees.</p>
+            <div class="guide-snapshot">
+              <div class="guide-snap-card"><div class="guide-snap-val">349.8B</div><div class="guide-snap-label">YTD Revenue</div></div>
+              <div class="guide-snap-card"><div class="guide-snap-val">426.6B</div><div class="guide-snap-label">FY26 Forecast</div></div>
+              <div class="guide-snap-card"><div class="guide-snap-val">435.8B</div><div class="guide-snap-label">FY27 Base Case</div></div>
+              <div class="guide-snap-card"><div class="guide-snap-val">231 / 132 / 236</div><div class="guide-snap-label">Active / At Risk / Dormant</div></div>
+            </div>
+            <p><strong>Key visuals:</strong> KPI cards across the top show YTD revenue, FY26 forecast, FY27 base case, and year-over-year growth. Below them, three customer health counts segment the 599 direct customers by purchase frequency. A scenario comparison shows FY27 under current pace through Challenge III (+78% volume growth).</p>
+            <p><strong>What to look for:</strong> The ratio of Active to total customers matters more than any single number. A healthy portfolio has over half of accounts Active. At 39% today, there is a significant opportunity to re-engage At Risk accounts before they become Dormant.</p>
+            <div class="guide-insight">
+              <div class="guide-insight-title">Key insight</div>
+              <p>FY27 base case projects continued growth &mdash; driven by the higher run rate flowing through, not optimistic assumptions. Re-activating even 10% of the 236 dormant accounts would add meaningful upside.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 7: Value Forecast -->
+      <div class="guide-card">
+        <div class="guide-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="guide-num" style="background: var(--purple-light);">P7</div>
+          <div class="guide-title-wrap">
+            <div class="guide-card-title">Value Forecast Projection (Five-Layer)</div>
+            <div class="guide-card-sub">The forecast engine room &mdash; month-by-month, customer-by-customer, SKU-by-SKU</div>
+          </div>
+          <div class="guide-toggle">&darr;</div>
+        </div>
+        <div class="guide-body">
+          <div class="guide-inner">
+            <p><strong>What it answers:</strong> &ldquo;How is the FY27 forecast built, and what drives each number?&rdquo; This is where analysts and planners spend most of their time.</p>
+            <div class="guide-snapshot">
+              <div class="guide-snap-card"><div class="guide-snap-val">31.2B</div><div class="guide-snap-label">WRR (VND/month)</div></div>
+              <div class="guide-snap-card"><div class="guide-snap-val">435.8B</div><div class="guide-snap-label">FY27 Base (slider 0%)</div></div>
+              <div class="guide-snap-card"><div class="guide-snap-val">29.4%</div><div class="guide-snap-label">MAPE (last month)</div></div>
+            </div>
+            <p><strong>Interactive sliders:</strong> Two sliders control the forecast. The <strong>Volume slider</strong> adjusts growth assumptions (0% = pure trend). The <strong>Price slider</strong> adjusts pricing level. They multiply together: +10% volume and +5% price &asymp; +15.5% total uplift. Charts and cards update in real-time.</p>
+            <p><strong>The five layers:</strong> (1) Weighted Run Rate &mdash; monthly earning power. (2) Seasonality &mdash; adjusts for T&#7871;t surge and post-T&#7871;t dip. (3) Retention &mdash; reduces forecast for customers likely to churn. (4) Scenario sliders &mdash; your growth/price assumptions. (5) Governance &mdash; floors that remove commercially unviable projections.</p>
+            <p><strong>What to look for:</strong> Platinum (PL) at ~61% of revenue dominates the forecast. Any significant change to PL pricing or distribution has an outsized impact. Always note slider positions when citing numbers to stakeholders.</p>
+            <div class="guide-insight">
+              <div class="guide-insight-title">On MAPE at 29.4%</div>
+              <p>The elevated forecast error reflects the model <em>underestimating</em> recent growth &mdash; a good problem. As strong months enter the weighted run rate window, the model self-corrects upward.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 8: Volume Dashboard -->
+      <div class="guide-card">
+        <div class="guide-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="guide-num" style="background: var(--gold);">P8</div>
+          <div class="guide-title-wrap">
+            <div class="guide-card-title">Volume Dashboard</div>
+            <div class="guide-card-sub">Converts revenue into physical units for operations &mdash; how many units to make, ship, and store</div>
+          </div>
+          <div class="guide-toggle">&darr;</div>
+        </div>
+        <div class="guide-body">
+          <div class="guide-inner">
+            <p><strong>What it answers:</strong> &ldquo;How many physical units do we need?&rdquo; Revenue forecasts must translate into product quantities for production, logistics, and warehouse planning.</p>
+            <p><strong>The Bridge formula (plain language):</strong> Units = Revenue &divide; (Price Factor &times; Selling Price per Unit). The Price Factor accounts for each customer&rsquo;s specific discount rate and VAT status. A customer with a 20% discount needs more units to generate the same revenue as a customer with a 5% discount. The bridge uses customer-level pricing for the vast majority of pairs &mdash; validated against historical data with near-zero error.</p>
+            <p><strong>Slider interaction:</strong> Moving the volume slider up increases both revenue and units. Moving the price slider up increases revenue but <em>decreases</em> units (higher price = fewer units needed). This distinction matters for operations.</p>
+            <p><strong>What to look for:</strong> UHT is the volume leader but a smaller revenue contributor (high-volume, low-price). PL is the opposite &mdash; lower volume but highest revenue. Volume and value do not move in lockstep.</p>
+            <div class="guide-insight">
+              <div class="guide-insight-title">Unit convention</div>
+              <p>All volumes are in primary selling units: H&#7897;p (tin/box) or T&uacute;i (bag) &mdash; not Th&ugrave;ng (cases). The PO Recommendation column translates these into actionable order quantities.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 9: Supply Chain -->
+      <div class="guide-card">
+        <div class="guide-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="guide-num" style="background: var(--red-alert);">P9</div>
+          <div class="guide-title-wrap">
+            <div class="guide-card-title">Supply Chain</div>
+            <div class="guide-card-sub">Stock levels, coverage months, and purchase order recommendations &mdash; check daily</div>
+          </div>
+          <div class="guide-toggle">&darr;</div>
+        </div>
+        <div class="guide-body">
+          <div class="guide-inner">
+            <p><strong>What it answers:</strong> &ldquo;Do we have enough stock to meet demand, and what do we need to order?&rdquo; This is the page procurement and supply chain should check daily.</p>
+            <div class="guide-snapshot">
+              <div class="guide-snap-card" style="background:#FFEBEE;"><div class="guide-snap-val" style="color:var(--red-alert);">4</div><div class="guide-snap-label">Critical (&lt; 1 month)</div></div>
+              <div class="guide-snap-card" style="background:#FFF8E1;"><div class="guide-snap-val" style="color:var(--amber-alert);">5</div><div class="guide-snap-label">Monitor (1&ndash;2.5 mo)</div></div>
+              <div class="guide-snap-card" style="background:#E8F5E9;"><div class="guide-snap-val" style="color:var(--green-safe);">6</div><div class="guide-snap-label">Safe (&gt; 2.5 months)</div></div>
+            </div>
+            <p><strong>The stock coverage table</strong> is the core view. Each row is one SKU with: stock on hand (SOH), in-transit units, coverage in months, and PO recommendation. Traffic light: <strong style="color:var(--red-alert);">red &lt; 1 month</strong> = order immediately, <strong style="color:var(--amber-alert);">amber 1&ndash;2.5</strong> = plan this week, <strong style="color:var(--green-safe);">green &gt; 2.5</strong> = no action needed.</p>
+            <p><strong>PO Recommendation formula:</strong> (2.5 months &times; monthly demand) &minus; stock on hand &minus; in-transit = order this much. If the number is 0, supply is sufficient.</p>
+            <p><strong>What to look for:</strong> Always check PL first &mdash; PL stockouts have the largest financial impact. Before panicking about low SOH, check the in-transit column. A large incoming shipment may resolve the situation within days.</p>
+            <div class="guide-insight">
+              <div class="guide-insight-title">Current alert</div>
+              <p><strong>Platinum is the biggest risk today</strong> &mdash; 4 of 5 PL SKUs below 1-month coverage with zero in-transit. PL drives ~61% of revenue, making these the highest-priority purchase orders.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 10: Penetration Dashboard -->
+      <div class="guide-card">
+        <div class="guide-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="guide-num" style="background: var(--green-safe);">P10</div>
+          <div class="guide-title-wrap">
+            <div class="guide-card-title">Penetration Dashboard</div>
+            <div class="guide-card-sub">Customer &times; product coverage map &mdash; where are the white spaces and dormant relationships?</div>
+          </div>
+          <div class="guide-toggle">&darr;</div>
+        </div>
+        <div class="guide-body">
+          <div class="guide-inner">
+            <p><strong>What it answers:</strong> &ldquo;Which customers buy which products, and where are the gaps?&rdquo; This page turns the customer portfolio into a sales action map.</p>
+            <p><strong>The penetration matrix</strong> is the core view. Rows = customers, columns = SKU families. Filled cells = active buying relationship. Empty cells = the customer has never bought this product (white space opportunity). Flagged cells = the customer <em>used to</em> buy this product but stopped (dormant &mdash; often easier to recover than new acquisition).</p>
+            <p><strong>What to look for:</strong> A fully-filled row means a high-penetration account buying across the range. A row with only 1&ndash;2 products is a cross-sell opportunity. A flagged (dormant) cell is a &ldquo;warm lead&rdquo; &mdash; the customer already knows the product and has buying infrastructure in place.</p>
+            <p><strong>Revenue concentration:</strong> If the top 10% of customers drive the vast majority of revenue, the business is concentrated. Penetration improvement in the mid-tier has the most growth leverage.</p>
+            <div class="guide-insight">
+              <div class="guide-insight-title">Growth lever</div>
+              <p>Cross-sell is the lowest-cost growth lever. PL penetration drives the portfolio &mdash; every percentage point of PL penetration improvement moves the needle more than any other family. The dormant rate is an early warning: if rising, customers are quietly disengaging at the product level.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /guide-cards -->
+
+    <!-- Key Concepts -->
+    <div class="guide-concepts">
+      <h3 style="text-align:center; font-size:20px; font-weight:700; color:var(--text-dark); margin-bottom:20px;">Key concepts behind the model</h3>
+      <div class="concept-grid">
+        <div class="concept-card">
+          <div class="concept-name">Weighted Run Rate (WRR)</div>
+          <div class="concept-desc">The company&rsquo;s &ldquo;monthly earning power.&rdquo; Blends the last 3 months (50%), 6 months (30%), and 12 months (20%) into a single rate. Currently <strong>31.2B VND/month</strong>. A rising WRR means the business is accelerating.</div>
+        </div>
+        <div class="concept-card">
+          <div class="concept-name">Five-Layer Forecast</div>
+          <div class="concept-desc">Each layer adds one adjustment: (1) Run Rate &rarr; (2) Seasonality (T&#7871;t surge/dip) &rarr; (3) Retention (churn risk) &rarr; (4) Scenario sliders &rarr; (5) Governance guardrails. Output = monthly projection per customer &times; SKU.</div>
+        </div>
+        <div class="concept-card">
+          <div class="concept-name">Bridge (Value &rarr; Volume)</div>
+          <div class="concept-desc">Converts revenue into physical units: Volume = Sale Value &divide; (Price Factor &times; ASP). Uses each customer&rsquo;s actual pricing terms where available, falling back to portfolio averages for new customers.</div>
+        </div>
+        <div class="concept-card">
+          <div class="concept-name">Retention Rate</div>
+          <div class="concept-desc">Probability a customer will still be buying next year. New customers get a lower rate (less certainty). Long-standing customers are assumed to continue. This adjusts the forecast downward for natural churn.</div>
+        </div>
+        <div class="concept-card">
+          <div class="concept-name">Seasonality Index</div>
+          <div class="concept-desc">Monthly adjustment for natural demand patterns. Pre-T&#7871;t months surge; post-T&#7871;t dips. The index ensures the forecast follows the actual demand calendar rather than assuming every month is equal.</div>
+        </div>
+        <div class="concept-card">
+          <div class="concept-name">Stock Coverage</div>
+          <div class="concept-desc">Months of inventory remaining at the current sell-through rate. (SOH + In-Transit) &divide; monthly demand. Below 1 month = critical. 1&ndash;2.5 = monitor. Above 2.5 = safe. Target buffer: 2.5 months.</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -270,11 +661,11 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
 <section class="powerbi-section" id="powerbi">
   <div class="section-center">
     <h2 class="section-title">Live Power BI Model</h2>
-    <p class="section-subtitle">Explore the FY27 forecast interactively — filter by customer, SKU, month. Adjust sliders, switch Challenge scenarios, and drill into every data point.</p>
+    <p class="section-subtitle">Explore the FY27 forecast interactively &mdash; filter by customer, SKU, month. Adjust sliders, switch scenarios, and drill into every data point.</p>
     <div class="powerbi-frame-wrap">
       <div class="powerbi-badge">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18V10M9 18V6M14 18V12M19 18V4"/></svg>
-        Interactive — click, filter, scroll inside the report
+        Interactive &mdash; click, filter, scroll inside the report
       </div>
       <div class="powerbi-frame">
         <iframe title="Project BI_a2MC_V9 live" src="https://app.powerbi.com/view?r=eyJrIjoiYjc0NTE1YzItNGU5OC00YjU2LTg5YTAtNWNkOWYzYjAwODk2IiwidCI6IjZhMzM4ODRkLThjNjctNDUwYy04YjgyLTc2MjczNjBlZGJhNCJ9" frameborder="0" allowFullScreen="true"></iframe>
@@ -287,18 +678,24 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
   <div class="section-center">
     <h2 class="section-title" style="font-size: 24px; margin-bottom: 32px;">Key definitions</h2>
     <div class="glossary-grid">
-      <div class="glossary-item"><div class="glossary-term">FY2026</div><div class="glossary-def">Fiscal Year 2026: July 2025 – June 2026. Three months remain (Apr, May, Jun 2026).</div></div>
-      <div class="glossary-item"><div class="glossary-term">FY2027</div><div class="glossary-def">Fiscal Year 2027: July 2026 – June 2027. The forecast target year — has not started yet.</div></div>
+      <div class="glossary-item"><div class="glossary-term">FY2026</div><div class="glossary-def">Fiscal Year 2026: July 2025 &ndash; June 2026. Two months remain (May, Jun 2026).</div></div>
+      <div class="glossary-item"><div class="glossary-term">FY2027</div><div class="glossary-def">Fiscal Year 2027: July 2026 &ndash; June 2027. The forecast target year &mdash; has not started yet.</div></div>
       <div class="glossary-item"><div class="glossary-term">B / M</div><div class="glossary-def">Billion / Million Vietnamese Dong (VND). All figures on this page are in VND.</div></div>
-      <div class="glossary-item"><div class="glossary-term">426B forecast</div><div class="glossary-def">Projected full-year FY2026 revenue = actual invoices to date + forecast for remaining months. Updates daily as new invoices post.</div></div>
+      <div class="glossary-item"><div class="glossary-term">427B forecast</div><div class="glossary-def">Projected full-year FY2026 revenue = actual invoices to date + forecast for remaining months. Updates daily as new invoices post.</div></div>
       <div class="glossary-item"><div class="glossary-term">Contract target (303B)</div><div class="glossary-def">The annual revenue commitment agreed between Livewell Distribution and a2 Milk for FY2026.</div></div>
       <div class="glossary-item"><div class="glossary-term">First-time buyer</div><div class="glossary-def">A customer with no purchase history at Livewell before July 2025. Their first-ever order was placed during FY2026. Not a returning dormant account.</div></div>
-      <div class="glossary-item"><div class="glossary-term">Active account</div><div class="glossary-def">Any direct customer (KH/KR code) that placed at least one a2 Milk order during FY2026. Total: 451.</div></div>
-      <div class="glossary-item"><div class="glossary-term">35.5% revenue share</div><div class="glossary-def">The share of monthly revenue generated by first-time FY2026 buyers. Measured on the most recent 3-month window, not a single month.</div></div>
-      <div class="glossary-item"><div class="glossary-term">Current pace (434B)</div><div class="glossary-def">What FY2027 revenue would be if the current monthly rate continues for 12 months with no further growth or decline.</div></div>
-      <div class="glossary-item"><div class="glossary-term">Challenge I / II / III</div><div class="glossary-def">Three progressively ambitious FY2027 targets. Growth is volume-driven (sell more units at current pricing). Price adjustments can be layered separately in the live model.</div></div>
-      <div class="glossary-item"><div class="glossary-term">Year-over-Year (%)</div><div class="glossary-def">FY2027 target divided by FY2026 forecast, minus 1. Example: 510B ÷ 426B − 1 = +19.7%.</div></div>
-      <div class="glossary-item"><div class="glossary-term">"Live" values</div><div class="glossary-def">Numbers that update automatically as new data loads. The FY2026 forecast, year-to-date actual, and all FY2027 targets recalculate daily. Values shown here reflect the model as of 27 April 2026.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Active (231)</div><div class="glossary-def">Direct customers purchasing at a healthy, consistent frequency. Core of the FY2027 forecast revenue.</div></div>
+      <div class="glossary-item"><div class="glossary-term">At Risk (132)</div><div class="glossary-def">Purchase frequency has slowed. Still buying, but at a reduced rate. Forecast applies a lower retention rate to these accounts.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Dormant (236)</div><div class="glossary-def">No recent orders. Zeroed out of FY2027 forecast. Re-activating any fraction is pure upside.</div></div>
+      <div class="glossary-item"><div class="glossary-term">35.5% revenue share</div><div class="glossary-def">The share of monthly revenue generated by first-time FY2026 buyers. Measured on the most recent 3-month window.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Product families</div><div class="glossary-def">7 A2M product lines: PL (Platinum, ~61% of revenue), GG (Gentle Gold), WMP, UHT, IMMU, MOM, SMP. 15 SKUs total.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Current pace (436B)</div><div class="glossary-def">FY2027 if the current monthly rate continues for 12 months with no additional growth or decline. Baseline scenario at 0% volume slider.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Challenge I (513B)</div><div class="glossary-def">FY2027 at +26% volume growth vs current run rate, same pricing. First growth target &mdash; equivalent to selling 26% more units.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Challenge II (612B)</div><div class="glossary-def">FY2027 at +52% volume growth vs current run rate, same pricing. Requires expanded distribution + deeper penetration.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Challenge III (716B)</div><div class="glossary-def">FY2027 at +78% volume growth vs current run rate, same pricing. Maximum volume push &mdash; the ceiling of organic growth.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Year-over-Year (%)</div><div class="glossary-def">FY2027 target divided by FY2026 forecast, minus 1. Example: 513B &divide; 427B &minus; 1 = +20.3%.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Stock coverage</div><div class="glossary-def">Months of inventory remaining at current sell-through rate. Below 1 month = critical, 1&ndash;2.5 months = monitor, above 2.5 = safe.</div></div>
+      <div class="glossary-item"><div class="glossary-term">&ldquo;Live&rdquo; values</div><div class="glossary-def">Numbers that update automatically in the Power BI model. Static values on this page reflect 29 April 2026. Refresh when data updates.</div></div>
     </div>
   </div>
 </section>
@@ -308,28 +705,29 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
 <section class="closing-section">
   <div class="closing-glow"></div>
   <div class="closing-content">
-    <h2 class="closing-headline">426B confirmed.<br>Now <em>choose the ambition.</em></h2>
-    <p class="closing-subtext">Contract exceeded. New accounts outperforming. Three FY2027 scenarios from 434B to 712B — explore the live model to decide which target fits.</p>
+    <h2 class="closing-headline">427B confirmed.<br>Now <em>choose the ambition.</em></h2>
+    <p class="closing-subtext">Contract exceeded. 350B in the bank with two months to go. Three FY2027 challenge targets from 513B to 716B &mdash; explore the live model to decide which ambition fits.</p>
     <a href="https://app.powerbi.com/view?r=eyJrIjoiYjc0NTE1YzItNGU5OC00YjU2LTg5YTAtNWNkOWYzYjAwODk2IiwidCI6IjZhMzM4ODRkLThjNjctNDUwYy04YjgyLTc2MjczNjBlZGJhNCJ9" target="_blank" rel="noopener" class="btn-primary">Open Full-Screen Model</a>
     <a href="#powerbi" class="btn-outline">Scroll to Embedded Report</a>
   </div>
 </section>
 
-<div class="footer-bar">a2 Milk® Vietnam | Livewell Distribution | FY27 Forecast Briefing | Confidential | Updated 27 Apr 2026</div>
+<div class="footer-bar">a2 Milk&reg; Vietnam | Livewell Distribution | FY27 Forecast Briefing | Confidential | Updated 29 Apr 2026</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
 gsap.registerPlugin(ScrollTrigger);
-gsap.set([".hero-logo",".hero-eyebrow",".hero-title",".hero-subtitle",".hero-cta",".scroll-indicator"],{opacity:0,y:30});
+gsap.set([".hero-logo",".hero-eyebrow",".hero-title",".hero-subtitle",".hero-cta",".scroll-indicator",".freshness-badge"],{opacity:0,y:30});
 var tl=gsap.timeline({delay:0.3});
 tl.to(".hero-logo",{opacity:1,y:0,duration:0.5,ease:"power3.out"})
 .to(".hero-eyebrow",{opacity:1,y:0,duration:0.5,ease:"power3.out"},"-=0.2")
 .to(".hero-title",{opacity:1,y:0,duration:0.9,ease:"power3.out"},"-=0.2")
 .to(".hero-subtitle",{opacity:1,y:0,duration:0.7,ease:"power2.out"},"-=0.4")
 .to(".hero-cta",{opacity:1,y:0,duration:0.6,ease:"power2.out",stagger:0.1},"-=0.3")
-.to(".scroll-indicator",{opacity:1,y:0,duration:0.4,ease:"power2.out"},"-=0.1");
+.to(".scroll-indicator",{opacity:1,y:0,duration:0.4,ease:"power2.out"},"-=0.1")
+.to(".freshness-badge",{opacity:1,y:0,duration:0.4,ease:"power2.out"},"-=0.2");
 
 var hero=document.querySelector('.hero');
 hero.addEventListener('mousemove',function(e){
@@ -342,12 +740,27 @@ hero.addEventListener('mousemove',function(e){
 gsap.set(".metric-card",{opacity:0,y:40,scale:0.96});
 gsap.to(".metric-card",{scrollTrigger:{trigger:".metrics-section",start:"top 75%"},opacity:1,y:0,scale:1,duration:0.55,stagger:0.1,ease:"back.out(1.1)"});
 
+gsap.set(".health-card",{opacity:0,y:40,scale:0.96});
+gsap.to(".health-card",{scrollTrigger:{trigger:".health-section",start:"top 75%"},opacity:1,y:0,scale:1,duration:0.55,stagger:0.12,ease:"back.out(1.1)"});
+gsap.from(".health-bar",{scrollTrigger:{trigger:".health-section",start:"top 65%"},scaleX:0,transformOrigin:"left center",duration:0.8,ease:"power3.out",delay:0.4});
+
 gsap.set(".evidence-card",{opacity:0,y:50,rotateX:12,transformPerspective:800,transformOrigin:"top center"});
 gsap.to(".evidence-card",{scrollTrigger:{trigger:".evidence-section",start:"top 68%"},opacity:1,y:0,rotateX:0,duration:0.7,stagger:0.12,ease:"power2.out"});
 gsap.from(".section-title",{scrollTrigger:{trigger:".evidence-section",start:"top 75%"},opacity:0,y:30,duration:0.7,ease:"power3.out"});
 
 gsap.set(".ch-card",{opacity:0,y:35,scale:0.94});
 gsap.to(".ch-card",{scrollTrigger:{trigger:".challenge-section",start:"top 70%"},opacity:1,y:0,scale:1,duration:0.6,stagger:0.12,ease:"back.out(1.3)"});
+
+gsap.from(".supply-alert",{scrollTrigger:{trigger:".supply-section",start:"top 75%"},opacity:0,x:-40,duration:0.7,ease:"power3.out"});
+
+gsap.set(".family-card",{opacity:0,y:20,scale:0.95});
+gsap.to(".family-card",{scrollTrigger:{trigger:".family-section",start:"top 78%"},opacity:1,y:0,scale:1,duration:0.4,stagger:0.06,ease:"back.out(1.2)"});
+
+gsap.from(".guide-flow",{scrollTrigger:{trigger:".guide-section",start:"top 75%"},opacity:0,y:30,duration:0.7,ease:"power3.out"});
+gsap.set(".guide-card",{opacity:0,y:30});
+gsap.to(".guide-card",{scrollTrigger:{trigger:".guide-cards",start:"top 78%"},opacity:1,y:0,duration:0.5,stagger:0.1,ease:"power2.out"});
+gsap.set(".concept-card",{opacity:0,y:20,scale:0.96});
+gsap.to(".concept-card",{scrollTrigger:{trigger:".guide-concepts",start:"top 80%"},opacity:1,y:0,scale:1,duration:0.4,stagger:0.08,ease:"back.out(1.1)"});
 
 gsap.from(".powerbi-frame-wrap",{scrollTrigger:{trigger:".powerbi-section",start:"top 75%"},opacity:0,y:50,duration:0.8,ease:"power3.out"});
 
@@ -361,7 +774,7 @@ new Chart(document.getElementById('acqChart'),{type:'bar',data:{labels:['Jul 25'
 
 new Chart(document.getElementById('marchChart'),{type:'bar',data:{labels:['Pre-FY26 buyers','Started 3-6 mo ago','Started < 3 mo ago'],datasets:[{data:[40.2,9.0,6.5],backgroundColor:[purple,purpleL,gold],borderRadius:6}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return Math.round(c.parsed.x*10)/10+'B VND';}}}},scales:{x:{ticks:{color:'#8A7A9C',font:{size:11},callback:function(v){return v+'B';}},grid:{color:purpleBg}},y:{ticks:{color:'#4A3B5C',font:{size:12,weight:500}},grid:{display:false}}}}});
 
-new Chart(document.getElementById('trendChart'),{type:'bar',data:{labels:['Jul 25','Aug','Sep','Oct','Nov','Dec','Jan 26','Feb','Mar','Apr'],datasets:[{label:'Established base',data:[11.2,16.5,23.8,22.9,24.3,30.2,22.1,28.5,40.2,27.0],backgroundColor:purple,borderRadius:6},{label:'New FY26 accounts',data:[4.3,5.0,6.7,6.9,7.4,9.1,6.9,8.5,15.5,9.0],backgroundColor:gold,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{color:'#4A3B5C',font:{size:12,weight:500},boxWidth:14,boxHeight:14,borderRadius:4,useBorderRadius:true}}},scales:{x:{stacked:true,ticks:{color:'#8A7A9C',font:{size:11}},grid:{display:false}},y:{stacked:true,ticks:{color:'#8A7A9C',font:{size:11},callback:function(v){return v+'B';}},grid:{color:purpleBg}}}}});
+new Chart(document.getElementById('trendChart'),{type:'bar',data:{labels:['Jul 25','Aug','Sep','Oct','Nov','Dec','Jan 26','Feb','Mar','Apr'],datasets:[{label:'Established base',data:[11.2,16.5,23.8,22.9,24.3,30.2,22.1,28.5,40.2,27.0],backgroundColor:purple,borderRadius:6},{label:'First-time FY26 buyers',data:[4.3,5.0,6.7,6.9,7.4,9.1,6.9,8.5,15.5,9.0],backgroundColor:gold,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{color:'#4A3B5C',font:{size:12,weight:500},boxWidth:14,boxHeight:14,borderRadius:4,useBorderRadius:true}}},scales:{x:{stacked:true,ticks:{color:'#8A7A9C',font:{size:11}},grid:{display:false}},y:{stacked:true,ticks:{color:'#8A7A9C',font:{size:11},callback:function(v){return v+'B';}},grid:{color:purpleBg}}}}});
 </script>
 </body>
 </html>
