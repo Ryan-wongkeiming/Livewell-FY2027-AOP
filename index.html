@@ -25,6 +25,10 @@
   --amber-alert: #F9A825;
   --green-safe: #2E7D32;
 }
+.src { display: inline-block; font-size: 9px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; vertical-align: middle; margin-left: 6px; line-height: 1.4; }
+.src.cs { background: #E8F5E9; color: #2E7D32; } /* Chinh sách */
+.src.pbi { background: #EDE5F5; color: #5B2D8E; } /* PBI model */
+.src.calc { background: #FFF8E1; color: #F57F17; } /* Calculated */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
@@ -228,6 +232,198 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
 
 @media (max-width: 900px) { .metrics-grid, .challenge-grid { grid-template-columns: repeat(2, 1fr); } .evidence-grid { grid-template-columns: 1fr; } .chart-row { grid-template-columns: 1fr; } .kpi-row { grid-template-columns: 1fr; } .health-grid { grid-template-columns: 1fr; } .supply-grid { grid-template-columns: 1fr; } .guide-inner { padding-left: 24px; } .concept-grid { grid-template-columns: 1fr; } .flow-arrow { display: none; } .guide-flow { gap: 8px; } }
 @media (max-width: 580px) { .metrics-grid, .challenge-grid { grid-template-columns: 1fr; } }
+
+/* Commercial Execution Plan Section */
+.exec-section { padding: 80px 24px; background: var(--cream); }
+.exec-header { text-align: center; margin-bottom: 48px; }
+.exec-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--gold-light); color: var(--gold); font-size: 12px; font-weight: 700; padding: 6px 16px; border-radius: 50px; margin-bottom: 14px; letter-spacing: 0.06em; text-transform: uppercase; }
+.exec-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+.exec-card { background: var(--white); border-radius: 16px; padding: 28px 20px; text-align: center; box-shadow: var(--card-shadow); border-top: 3px solid var(--gold); transition: transform 0.3s; }
+.exec-card:hover { transform: translateY(-4px); }
+.exec-card .exec-val { font-size: 32px; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
+.exec-card .exec-unit { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+.exec-detail-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 20px; }
+.exec-detail-box { background: var(--white); border-radius: 16px; padding: 28px; box-shadow: var(--card-shadow); }
+.exec-detail-title { font-size: 16px; font-weight: 700; color: var(--purple); margin-bottom: 16px; }
+.exec-tier-row { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid #f0ecf5; font-size: 13px; }
+.exec-tier-row:last-child { border-bottom: none; }
+.exec-tier-label { width: 80px; font-weight: 600; color: var(--text-dark); flex-shrink: 0; }
+.exec-tier-bar { flex: 1; height: 22px; background: var(--purple-bg); border-radius: 6px; position: relative; overflow: hidden; }
+.exec-tier-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 8px; font-size: 11px; font-weight: 600; color: white; }
+.exec-tier-count { width: 60px; text-align: right; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.exec-align-card { background: linear-gradient(135deg, var(--purple-soft), var(--purple-bg)); border-radius: 16px; padding: 28px; border-left: 4px solid var(--green-safe); }
+.exec-align-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.exec-align-row:last-child { margin-bottom: 0; }
+.exec-align-label { font-size: 13px; color: var(--text-body); min-width: 160px; }
+.exec-align-val { font-size: 20px; font-weight: 800; color: var(--purple); }
+.exec-align-tag { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 6px; }
+.exec-align-tag.match { background: #E8F5E9; color: #2E7D32; }
+@media (max-width: 900px) { .exec-grid { grid-template-columns: repeat(2, 1fr); } .exec-detail-grid { grid-template-columns: 1fr; } }
+@media (max-width: 580px) { .exec-grid { grid-template-columns: 1fr; } }
+
+/* ========== Execution Plan Expansion (ep-*) ========== */
+.ep-act { margin-bottom: 64px; }
+.ep-act:last-child { margin-bottom: 0; }
+.ep-act-header { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+.ep-act-num { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800; color: white; flex-shrink: 0; }
+.ep-act-num.act1 { background: var(--purple); }
+.ep-act-num.act2 { background: var(--purple-light); }
+.ep-act-num.act3 { background: var(--gold); }
+.ep-act-num.act4 { background: var(--green-safe); }
+.ep-act-num.act5 { background: var(--purple-deep); }
+.ep-act-title-wrap { flex: 1; }
+.ep-act-title { font-size: 22px; font-weight: 700; color: var(--text-dark); line-height: 1.3; }
+.ep-act-tagline { font-size: 13px; color: var(--text-muted); margin-top: 2px; font-style: italic; }
+
+.ep-sub-title { font-size: 17px; font-weight: 700; color: var(--purple); margin-bottom: 16px; margin-top: 28px; padding-left: 4px; border-left: 3px solid var(--purple-light); padding-left: 12px; }
+.ep-sub-title.gold-accent { border-left-color: var(--gold); color: var(--gold); }
+.ep-sub-title.green-accent { border-left-color: var(--green-safe); color: var(--green-safe); }
+
+/* Accordion panels */
+.ep-accordion { background: var(--white); border-radius: 16px; box-shadow: var(--card-shadow); overflow: hidden; margin-bottom: 16px; }
+.ep-accordion-header { display: flex; align-items: center; gap: 12px; padding: 18px 24px; cursor: pointer; user-select: none; transition: background 0.2s; }
+.ep-accordion-header:hover { background: var(--purple-soft); }
+.ep-accordion-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: white; flex-shrink: 0; }
+.ep-accordion-title { flex: 1; font-size: 15px; font-weight: 600; color: var(--text-dark); }
+.ep-accordion-sub { font-size: 12px; color: var(--text-muted); font-weight: 400; margin-left: 8px; }
+.ep-accordion-toggle { font-size: 18px; color: var(--purple-light); transition: transform 0.3s; flex-shrink: 0; }
+.ep-accordion.open .ep-accordion-toggle { transform: rotate(180deg); }
+.ep-accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.45s ease; }
+.ep-accordion.open .ep-accordion-body { max-height: 8000px; }
+.ep-accordion-inner { padding: 0 24px 24px; }
+
+/* Data tables */
+.ep-table-wrap { overflow-x: auto; margin: 12px 0; border-radius: 10px; border: 1px solid var(--purple-bg); }
+.ep-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.ep-table thead th { background: var(--purple); color: white; padding: 10px 12px; text-align: left; font-weight: 600; white-space: nowrap; position: sticky; top: 0; }
+.ep-table thead th:first-child { border-radius: 0; }
+.ep-table thead th:last-child { border-radius: 0; }
+.ep-table tbody td { padding: 9px 12px; border-bottom: 1px solid #f0ecf5; color: var(--text-body); }
+.ep-table tbody tr:last-child td { border-bottom: none; }
+.ep-table tbody tr:hover { background: var(--purple-soft); }
+.ep-table tbody tr.ep-total-row { background: var(--gold-light); font-weight: 700; }
+.ep-table tbody tr.ep-total-row td { color: var(--text-dark); }
+.ep-table.compact { font-size: 11.5px; }
+.ep-table.compact td, .ep-table.compact th { padding: 7px 10px; }
+.ep-table thead.gold-head th { background: var(--gold); }
+.ep-table thead.green-head th { background: var(--green-safe); }
+.ep-table thead.purple-deep-head th { background: var(--purple-deep); }
+
+/* Callout / highlight boxes */
+.ep-callout { border-radius: 12px; padding: 20px 24px; margin: 16px 0; font-size: 14px; line-height: 1.75; }
+.ep-callout.purple { background: var(--purple-soft); border-left: 4px solid var(--purple); color: var(--text-body); }
+.ep-callout.gold { background: var(--gold-light); border-left: 4px solid var(--gold); color: var(--text-body); }
+.ep-callout.green { background: #E8F5E9; border-left: 4px solid var(--green-safe); color: var(--text-body); }
+.ep-callout.amber { background: #FFF8E1; border-left: 4px solid var(--amber-alert); color: var(--text-body); }
+.ep-callout strong { color: var(--text-dark); }
+.ep-callout .ep-callout-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+.ep-callout.purple .ep-callout-title { color: var(--purple); }
+.ep-callout.gold .ep-callout-title { color: var(--gold); }
+.ep-callout.green .ep-callout-title { color: var(--green-safe); }
+
+/* Bridge / comparison cards */
+.ep-bridge { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; align-items: center; margin: 20px 0; }
+.ep-bridge-card { background: var(--white); border-radius: 14px; padding: 24px; text-align: center; box-shadow: var(--card-shadow); }
+.ep-bridge-card.fy26 { border-top: 3px solid var(--purple-light); }
+.ep-bridge-card.fy27 { border-top: 3px solid var(--gold); }
+.ep-bridge-arrow { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 0 16px; color: var(--green-safe); font-weight: 700; font-size: 13px; }
+.ep-bridge-arrow .arrow-icon { font-size: 28px; }
+.ep-bridge-val { font-size: 28px; font-weight: 800; color: var(--purple); }
+.ep-bridge-card.fy27 .ep-bridge-val { color: var(--gold); }
+.ep-bridge-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+.ep-bridge-delta { font-size: 12px; margin-top: 6px; }
+
+/* Engine cards grid */
+.ep-engine-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 20px 0; }
+.ep-engine-card { background: var(--white); border-radius: 16px; padding: 28px 22px; box-shadow: var(--card-shadow); border-top: 4px solid var(--purple); transition: transform 0.3s, box-shadow 0.3s; }
+.ep-engine-card:hover { transform: translateY(-4px); box-shadow: var(--card-hover); }
+.ep-engine-card.engine2 { border-top-color: var(--gold); }
+.ep-engine-card.engine3 { border-top-color: var(--green-safe); }
+.ep-engine-num { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple-light); margin-bottom: 8px; }
+.ep-engine-card.engine2 .ep-engine-num { color: var(--gold); }
+.ep-engine-card.engine3 .ep-engine-num { color: var(--green-safe); }
+.ep-engine-name { font-size: 17px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+.ep-engine-desc { font-size: 13px; color: var(--text-body); line-height: 1.7; }
+
+/* Investment split visual */
+.ep-invest-split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 16px 0; }
+.ep-invest-box { background: var(--white); border-radius: 14px; padding: 24px; box-shadow: var(--card-shadow); text-align: center; }
+.ep-invest-box .ep-invest-val { font-size: 32px; font-weight: 800; }
+.ep-invest-box .ep-invest-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+.ep-invest-box.lw { border-top: 3px solid var(--purple); }
+.ep-invest-box.lw .ep-invest-val { color: var(--purple); }
+.ep-invest-box.a2mc { border-top: 3px solid var(--gold); }
+.ep-invest-box.a2mc .ep-invest-val { color: var(--gold); }
+
+/* Calendar grid */
+.ep-calendar { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0; border-radius: 14px; overflow: hidden; border: 1px solid var(--purple-bg); margin: 16px 0; }
+.ep-cal-month { background: var(--white); border-right: 1px solid var(--purple-bg); border-bottom: 1px solid var(--purple-bg); padding: 10px 6px; min-height: 100px; font-size: 11px; position: relative; }
+.ep-cal-month:nth-child(12n) { border-right: none; }
+.ep-cal-month-name { font-weight: 700; color: var(--purple); font-size: 12px; margin-bottom: 6px; text-align: center; }
+.ep-cal-occasion { font-size: 10px; color: var(--text-muted); text-align: center; margin-bottom: 4px; font-style: italic; }
+.ep-cal-tag { display: block; padding: 2px 4px; border-radius: 3px; font-size: 9.5px; margin-bottom: 2px; line-height: 1.3; font-weight: 500; }
+.ep-cal-tag.campaign { background: #EDE7F6; color: var(--purple); }
+.ep-cal-tag.trade { background: var(--gold-light); color: #8B6914; }
+.ep-cal-tag.npd { background: #E8F5E9; color: var(--green-safe); }
+.ep-cal-tag.mt { background: #E3F2FD; color: #1565C0; }
+.ep-cal-tag.mkt { background: #FCE4EC; color: #C62828; }
+.ep-cal-tag.gwp { background: #FFF3E0; color: #E65100; }
+
+/* Calendar track rows (alternative layout for detail) */
+.ep-cal-tracks { margin: 16px 0; }
+.ep-cal-track { margin-bottom: 16px; }
+.ep-cal-track-name { font-size: 13px; font-weight: 700; color: var(--purple); margin-bottom: 8px; padding-left: 8px; border-left: 3px solid var(--purple); }
+.ep-cal-track-name.gold { color: var(--gold); border-left-color: var(--gold); }
+.ep-cal-track-name.green { color: var(--green-safe); border-left-color: var(--green-safe); }
+.ep-cal-track-name.blue { color: #1565C0; border-left-color: #1565C0; }
+.ep-cal-track-name.red { color: #C62828; border-left-color: #C62828; }
+
+/* Channel mix donut placeholder */
+.ep-channel-bar { display: flex; height: 14px; border-radius: 7px; overflow: hidden; margin: 12px 0 8px; }
+.ep-channel-bar div { height: 100%; }
+.ep-channel-legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--text-body); }
+.ep-channel-legend-item { display: flex; align-items: center; gap: 5px; }
+.ep-channel-legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+
+/* Key changes highlight */
+.ep-changes-list { list-style: none; padding: 0; margin: 12px 0; }
+.ep-changes-list li { position: relative; padding: 8px 0 8px 24px; font-size: 13px; color: var(--text-body); line-height: 1.6; border-bottom: 1px solid #f0ecf5; }
+.ep-changes-list li:last-child { border-bottom: none; }
+.ep-changes-list li::before { content: ''; position: absolute; left: 0; top: 14px; width: 10px; height: 10px; border-radius: 50%; background: var(--green-safe); }
+.ep-changes-list li.change-amber::before { background: var(--amber-alert); }
+.ep-changes-list li.change-purple::before { background: var(--purple); }
+
+/* NZD table accent */
+.ep-nzd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 16px 0; }
+.ep-nzd-card { background: var(--white); border-radius: 12px; padding: 20px; text-align: center; box-shadow: var(--card-shadow); }
+.ep-nzd-card .ep-nzd-scenario { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 6px; }
+.ep-nzd-card .ep-nzd-val { font-size: 22px; font-weight: 800; color: var(--purple); }
+.ep-nzd-card .ep-nzd-pct { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+.ep-nzd-card.mid { border-top: 3px solid var(--gold); }
+.ep-nzd-card.mid .ep-nzd-val { color: var(--gold); }
+
+/* D2C/SubD split side-by-side */
+.ep-split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 16px 0; }
+
+/* Delivery framing cards */
+.ep-deliver-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 16px 0; }
+.ep-deliver-card { background: var(--white); border-radius: 14px; padding: 22px; box-shadow: var(--card-shadow); }
+.ep-deliver-card .ep-deliver-stat { font-size: 28px; font-weight: 800; color: var(--purple); margin-bottom: 4px; }
+.ep-deliver-card .ep-deliver-desc { font-size: 13px; color: var(--text-body); line-height: 1.6; }
+
+@media (max-width: 900px) {
+  .ep-engine-grid { grid-template-columns: 1fr; }
+  .ep-bridge { grid-template-columns: 1fr; gap: 12px; }
+  .ep-bridge-arrow { transform: rotate(90deg); padding: 8px 0; }
+  .ep-invest-split { grid-template-columns: 1fr; }
+  .ep-split-grid { grid-template-columns: 1fr; }
+  .ep-deliver-grid { grid-template-columns: 1fr; }
+  .ep-nzd-grid { grid-template-columns: 1fr; }
+  .ep-calendar { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 580px) {
+  .ep-calendar { grid-template-columns: repeat(3, 1fr); }
+}
 </style>
 </head>
 <body>
@@ -258,13 +454,20 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
 
 <div class="wave-divider wave-purple"><svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,80 L0,80 Z"/></svg></div>
 
+<div class="source-legend" style="max-width:900px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;gap:16px;justify-content:center;flex-wrap:wrap;font-size:11px;color:var(--text-muted);">
+  <span style="font-weight:600;">Data sources:</span>
+  <span><span class="src pbi" style="margin:0;">PBI</span> Power BI live model</span>
+  <span><span class="src cs" style="margin:0;">Chinh s&aacute;ch</span> Commercial plan (Excel)</span>
+  <span><span class="src calc" style="margin:0;">Calc</span> Arithmetic from sourced figures</span>
+</div>
+
 <section class="metrics-section" id="metrics">
   <div class="section-center">
     <div class="metrics-grid">
-      <div class="metric-card"><div class="metric-value">446B</div><div class="metric-label">FY2026 full-year forecast (VND)<br>Updates daily as May&ndash;Jun invoices post</div></div>
-      <div class="metric-card"><div class="metric-value">+47%</div><div class="metric-label">Above a2 Milk contract target<br>Forecast 446B vs 303B annual commitment</div></div>
-      <div class="metric-card"><div class="metric-value gold">140</div><div class="metric-label">First-time buyers in FY2026<br>No prior A2M purchases before Jul 2025</div></div>
-      <div class="metric-card"><div class="metric-value gold">35.5%</div><div class="metric-label">Monthly revenue from first-time buyers<br>Growing every month &mdash; not a one-off</div></div>
+      <div class="metric-card"><div class="metric-value">446B</div><div class="metric-label">FY2026 full-year forecast (VND)<span class="src pbi">PBI</span><br>Updates daily as May&ndash;Jun invoices post</div></div>
+      <div class="metric-card"><div class="metric-value">+47%</div><div class="metric-label">Above a2 Milk contract target<span class="src calc">Calc</span><br>Forecast 446B vs 303B annual commitment</div></div>
+      <div class="metric-card"><div class="metric-value gold">140</div><div class="metric-label">First-time buyers in FY2026<span class="src pbi">PBI</span><br>No prior A2M purchases before Jul 2025</div></div>
+      <div class="metric-card"><div class="metric-value gold">35.5%</div><div class="metric-label">Monthly revenue from first-time buyers<span class="src pbi">PBI</span><br>Growing every month &mdash; not a one-off</div></div>
     </div>
   </div>
 </section>
@@ -272,7 +475,7 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
 <!-- Customer Health Section -->
 <section class="health-section" id="health">
   <div class="section-center">
-    <h2 class="section-title" style="font-size: 28px; margin-bottom: 8px;">Customer portfolio health</h2>
+    <h2 class="section-title" style="font-size: 28px; margin-bottom: 8px;">Customer portfolio health<span class="src pbi">PBI</span></h2>
     <p class="section-subtitle" style="margin-bottom: 36px;">599 direct customers segmented by purchase frequency. Active = buying at healthy pace. At Risk = frequency slowing. Dormant = inactive.</p>
     <div class="health-grid">
       <div class="health-card active">
@@ -304,7 +507,7 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
 
 <section class="evidence-section">
   <div class="section-center">
-    <h2 class="section-title">Why we believe this growth is real</h2>
+    <h2 class="section-title">Why we believe this growth is real<span class="src pbi">PBI</span></h2>
     <p class="section-subtitle">Four data points that confirm FY2026 performance is structural &mdash; and sustainable into FY2027.</p>
     <div class="evidence-grid">
       <div class="evidence-card">
@@ -335,7 +538,7 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
 
 <section class="chart-section">
   <div class="section-center">
-    <h2 class="section-title" style="margin-bottom: 40px;">10 months of data &mdash; the trajectory speaks</h2>
+    <h2 class="section-title" style="margin-bottom: 40px;">10 months of data &mdash; the trajectory speaks<span class="src pbi">PBI</span></h2>
     <div class="chart-row">
       <div class="chart-box">
         <div class="chart-title">First-time buyer acquisition by month</div>
@@ -368,42 +571,865 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
 
 <section class="challenge-section" id="challenges">
   <div class="section-center">
-    <h2 class="section-title">FY2027 growth scenarios</h2>
+    <h2 class="section-title">FY2027 growth scenarios<span class="src pbi">PBI</span></h2>
     <p class="section-subtitle">Three challenge targets anchored to FY2026 performance (446B). Volume-driven growth at current pricing. As May&ndash;June actuals load, both the baseline and all targets recalibrate automatically.</p>
     <div class="challenge-grid">
       <div class="ch-card">
         <div class="ch-label">Current pace</div>
         <div class="ch-value">548B</div>
-        <div class="ch-factor">+22.9% vs FY2026 (446B)<br>No additional growth assumed</div>
+        <div class="ch-factor">+22.9% vs FY2026 (446B)<span class="src calc">Calc</span><br>No additional growth assumed</div>
       </div>
       <div class="ch-card">
         <div class="ch-label">Challenge I</div>
         <div class="ch-value">623B</div>
-        <div class="ch-factor">+39.7% vs FY2026 (446B)<br>+20% volume growth, same pricing</div>
+        <div class="ch-factor">+39.7% vs FY2026 (446B)<span class="src calc">Calc</span><br>+20% volume growth, same pricing</div>
       </div>
       <div class="ch-card featured">
         <div class="ch-label">Challenge II</div>
         <div class="ch-value">714B</div>
-        <div class="ch-factor">+60.1% vs FY2026 (446B)<br>+40% volume growth, same pricing</div>
+        <div class="ch-factor">+60.1% vs FY2026 (446B)<span class="src calc">Calc</span><br>+40% volume growth, same pricing</div>
       </div>
       <div class="ch-card">
         <div class="ch-label">Challenge III</div>
         <div class="ch-value" style="color: var(--gold);">790B</div>
-        <div class="ch-factor">+77.1% vs FY2026 (446B)<br>+55% volume growth, maximum push</div>
+        <div class="ch-factor">+77.1% vs FY2026 (446B)<span class="src calc">Calc</span><br>+55% volume growth, maximum push</div>
       </div>
     </div>
     <div class="kpi-row">
-      <div class="kpi-card"><div class="kpi-label">FY2026 Forecast</div><div class="kpi-value">446B</div></div>
-      <div class="kpi-card"><div class="kpi-label">FY2027 Range</div><div class="kpi-value">548B<small> &mdash; </small>790B</div></div>
-      <div class="kpi-card"><div class="kpi-label">Year-over-Year Growth</div><div class="kpi-value">+22.9%<small> &mdash; </small>+77.1%</div></div>
+      <div class="kpi-card"><div class="kpi-label">FY2026 Forecast<span class="src pbi">PBI</span></div><div class="kpi-value">446B</div></div>
+      <div class="kpi-card"><div class="kpi-label">FY2027 Range<span class="src pbi">PBI</span></div><div class="kpi-value">548B<small> &mdash; </small>790B</div></div>
+      <div class="kpi-card"><div class="kpi-label">Year-over-Year Growth<span class="src calc">Calc</span></div><div class="kpi-value">+22.9%<small> &mdash; </small>+77.1%</div></div>
     </div>
   </div>
 </section>
 
+<!-- Commercial Execution Plan -->
+<div class="wave-divider wave-cream"><svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,60 C480,0 960,80 1440,20 L1440,80 L0,80 Z"/></svg></div>
+
+<section class="exec-section" id="execution">
+  <div class="section-center">
+    <div class="exec-header">
+      <div class="exec-badge">New &mdash; Commercial team plan</div>
+      <h2 class="section-title">FY2027 execution plan<span class="src cs">Chinh s&aacute;ch</span></h2>
+      <p class="section-subtitle">A five-act narrative of the commercial team&rsquo;s bottom-up proposal: from ambition through investment to a 12-month execution calendar. Every number from the master policy documents is preserved below &mdash; click to expand detail panels.</p>
+    </div>
+
+    <!-- ===== ACT 1: THE AMBITION ===== -->
+    <div class="ep-act" id="ep-act1">
+      <div class="ep-act-header">
+        <div class="ep-act-num act1">1</div>
+        <div class="ep-act-title-wrap">
+          <div class="ep-act-title">The Ambition &mdash; &ldquo;We built this bottom-up&rdquo;</div>
+          <div class="ep-act-tagline">514 accounts, 8 tiers, every target named and assigned</div>
+        </div>
+      </div>
+
+      <!-- KPI cards (existing 4) -->
+      <div class="exec-grid">
+        <div class="exec-card"><div class="exec-val">514</div><div class="exec-unit">GT accounts targeted<br><span style="font-size:11px;">257 D2C + 257 Sub-D</span></div></div>
+        <div class="exec-card"><div class="exec-val">895B</div><div class="exec-unit">GT sell-out target (VND)<br><span style="font-size:11px;">Retail price to consumer</span></div></div>
+        <div class="exec-card"><div class="exec-val">NPD</div><div class="exec-unit">Genesis + Organic<br><span style="font-size:11px;">Enablers to reach tier targets</span></div></div>
+        <div class="exec-card"><div class="exec-val">312B</div><div class="exec-unit">Total GT investment (VND)<br><span style="font-size:11px;">LW 214B + a2MC 98B</span></div></div>
+      </div>
+
+      <!-- Account tier bar chart (existing) -->
+      <div class="exec-detail-grid">
+        <div class="exec-detail-box">
+          <div class="exec-detail-title">Account targets by revenue tier (All GT)</div>
+          <div class="exec-tier-row">
+            <div class="exec-tier-label">L1 30M/mo</div>
+            <div class="exec-tier-bar"><div class="exec-tier-fill" style="width:62.3%; background:var(--purple);">320</div></div>
+            <div class="exec-tier-count">192B/yr</div>
+          </div>
+          <div class="exec-tier-row">
+            <div class="exec-tier-label">L2 50M/mo</div>
+            <div class="exec-tier-bar"><div class="exec-tier-fill" style="width:19.5%; background:var(--purple);">100</div></div>
+            <div class="exec-tier-count">120B/yr</div>
+          </div>
+          <div class="exec-tier-row">
+            <div class="exec-tier-label">L3 100M/mo</div>
+            <div class="exec-tier-bar"><div class="exec-tier-fill" style="width:8.8%; background:var(--purple-light);">45</div></div>
+            <div class="exec-tier-count">108B/yr</div>
+          </div>
+          <div class="exec-tier-row">
+            <div class="exec-tier-label">L4 200M/mo</div>
+            <div class="exec-tier-bar"><div class="exec-tier-fill" style="width:3.1%; background:var(--purple-light);">16</div></div>
+            <div class="exec-tier-count">67B/yr</div>
+          </div>
+          <div class="exec-tier-row">
+            <div class="exec-tier-label">L5 350M/mo</div>
+            <div class="exec-tier-bar"><div class="exec-tier-fill" style="width:3.1%; background:var(--gold);">16</div></div>
+            <div class="exec-tier-count">96B/yr</div>
+          </div>
+          <div class="exec-tier-row">
+            <div class="exec-tier-label">L6 500M/mo</div>
+            <div class="exec-tier-bar"><div class="exec-tier-fill" style="width:2.3%; background:var(--gold);">12</div></div>
+            <div class="exec-tier-count">144B/yr</div>
+          </div>
+          <div class="exec-tier-row">
+            <div class="exec-tier-label">L7 1B/mo</div>
+            <div class="exec-tier-bar"><div class="exec-tier-fill" style="width:0.8%; background:#C7A44A;">4</div></div>
+            <div class="exec-tier-count">96B/yr</div>
+          </div>
+          <div class="exec-tier-row">
+            <div class="exec-tier-label">L8 2B/mo</div>
+            <div class="exec-tier-bar"><div class="exec-tier-fill" style="width:0.4%; background:#C7A44A;">2</div></div>
+            <div class="exec-tier-count">72B/yr</div>
+          </div>
+        </div>
+
+        <div>
+          <!-- Scenario alignment -->
+          <div class="exec-align-card" style="margin-bottom:20px;">
+            <div class="exec-detail-title" style="color:var(--green-safe);">Plan structure</div>
+            <div class="exec-align-row">
+              <div class="exec-align-label">GT sell-out (building block)</div>
+              <div class="exec-align-val">895.2B</div>
+              <div class="exec-align-tag match">Sourced</div>
+            </div>
+            <div class="exec-align-row">
+              <div class="exec-align-label">On-invoice discount range</div>
+              <div class="exec-align-val">12.5%&ndash;22%</div>
+              <div class="exec-align-tag match">Sourced</div>
+            </div>
+            <div class="exec-align-row">
+              <div class="exec-align-label">Account growth FY26&rarr;27</div>
+              <div class="exec-align-val">359&rarr;514 (+43%)</div>
+              <div class="exec-align-tag"><span class="src pbi" style="margin:0;">359=PBI</span> <span class="src cs" style="margin:0;">514=CS</span> <span class="src calc" style="margin:0;">%=Calc</span></div>
+            </div>
+            <div class="exec-align-row">
+              <div class="exec-align-label">NPD dependency</div>
+              <div class="exec-align-val" style="color:var(--amber-alert);">Genesis + Organic</div>
+            </div>
+          </div>
+          <!-- Pressure dilution callout -->
+          <div class="ep-callout green">
+            <div class="ep-callout-title">Pressure dilution + NPD strategy</div>
+            Rather than squeezing 359 existing accounts harder, the plan adds <strong>155 new accounts</strong> and relies on <strong>NPD launches</strong> (Genesis HMO, a2 Organic) to help accounts reach higher tier targets. The building block is product-agnostic &mdash; tier thresholds measure total sell-out, and NPD is an enabler to reach them.
+          </div>
+        </div>
+      </div>
+
+      <!-- D2C vs Sub-D split -->
+      <div class="ep-accordion" style="margin-top: 20px;">
+        <div class="ep-accordion-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="ep-accordion-icon" style="background:var(--purple);">D/S</div>
+          <div class="ep-accordion-title">D2C vs Sub-D account split<span class="src cs">Chinh s&aacute;ch</span> <span class="ep-accordion-sub">257 + 257 accounts = 645B + 208.7B sell-out</span></div>
+          <div class="ep-accordion-toggle">&darr;</div>
+        </div>
+        <div class="ep-accordion-body">
+          <div class="ep-accordion-inner">
+            <div class="ep-split-grid">
+              <div>
+                <div class="ep-sub-title">D2C (257 accounts) &mdash; 645B sell-out</div>
+                <div class="ep-table-wrap">
+                  <table class="ep-table compact">
+                    <thead><tr><th>Tier</th><th>Accounts</th><th>Annual Sell-out</th></tr></thead>
+                    <tbody>
+                      <tr><td>L1 (30M/mo)</td><td>120</td><td>72B</td></tr>
+                      <tr><td>L2 (50M/mo)</td><td>60</td><td>72B</td></tr>
+                      <tr><td>L3 (100M/mo)</td><td>30</td><td>72B</td></tr>
+                      <tr><td>L4 (200M/mo)</td><td>15</td><td>63B</td></tr>
+                      <tr><td>L5 (350M/mo)</td><td>15</td><td>90B</td></tr>
+                      <tr><td>L6 (500M/mo)</td><td>12</td><td>144B</td></tr>
+                      <tr><td>L7 (1B/mo)</td><td>4</td><td>96B</td></tr>
+                      <tr><td>L8 (2B/mo)</td><td>1</td><td>36B</td></tr>
+                      <tr class="ep-total-row"><td>Total D2C</td><td>257</td><td>645B</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div>
+                <div class="ep-sub-title">Sub-D (257 accounts) &mdash; 208.7B sell-out</div>
+                <div class="ep-table-wrap">
+                  <table class="ep-table compact">
+                    <thead><tr><th>Tier</th><th>Accounts</th><th>Annual Sell-out</th></tr></thead>
+                    <tbody>
+                      <tr><td>L1 (30M/mo)</td><td>200</td><td>120B</td></tr>
+                      <tr><td>L2 (50M/mo)</td><td>40</td><td>48B</td></tr>
+                      <tr><td>L3 (100M/mo)</td><td>15</td><td>36B</td></tr>
+                      <tr><td>L4 (200M/mo)</td><td>1</td><td>4.2B</td></tr>
+                      <tr><td>L5 (350M/mo)</td><td>1</td><td>0.5B</td></tr>
+                      <tr style="color:var(--text-muted);"><td>L6&ndash;L8</td><td colspan="2">&mdash; Sub-D does not reach L6+</td></tr>
+                      <tr class="ep-total-row"><td>Total Sub-D</td><td>257</td><td>208.7B</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FY26 to FY27 bridge -->
+      <div class="ep-accordion">
+        <div class="ep-accordion-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="ep-accordion-icon" style="background:var(--green-safe);">&#8593;</div>
+          <div class="ep-accordion-title">FY26 &rarr; FY27 growth bridge<span class="src pbi">FY26=PBI</span><span class="src cs">FY27=CS</span> <span class="ep-accordion-sub">359 &rarr; 514 accounts, 256.5B &rarr; 859.2B sell-out</span></div>
+          <div class="ep-accordion-toggle">&darr;</div>
+        </div>
+        <div class="ep-accordion-body">
+          <div class="ep-accordion-inner">
+            <div class="ep-bridge">
+              <div class="ep-bridge-card fy26">
+                <div class="ep-bridge-val">359</div>
+                <div class="ep-bridge-label">FY26 accounts</div>
+                <div class="ep-bridge-delta" style="color:var(--text-muted);">256.5B sell-out (62.8% achievement)</div>
+              </div>
+              <div class="ep-bridge-arrow">
+                <span class="arrow-icon">&rarr;</span>
+                <span>+43% accts</span>
+                <span>+3.35&times; sell-out</span>
+              </div>
+              <div class="ep-bridge-card fy27">
+                <div class="ep-bridge-val">514</div>
+                <div class="ep-bridge-label">FY27 plan accounts</div>
+                <div class="ep-bridge-delta" style="color:var(--gold);">859.2B sell-out target</div>
+              </div>
+            </div>
+            <div class="ep-callout purple">
+              <strong>+155 new accounts</strong> dilute the growth pressure across a wider base. The 895.2B sell-out building block is product-agnostic &mdash; NPD launches (Genesis, Organic) are expected to help accounts reach their tier targets. The board decides how this plan maps to the PBI scenario ladder (548B&ndash;790B).
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /ACT 1 -->
+
+    <!-- ===== ACT 2: THE MACHINE ===== -->
+    <div class="ep-act" id="ep-act2">
+      <div class="ep-act-header">
+        <div class="ep-act-num act2">2</div>
+        <div class="ep-act-title-wrap">
+          <div class="ep-act-title">The Machine &mdash; Three engines driving execution</div>
+          <div class="ep-act-tagline">Incentive ladder + portfolio expansion + channel diversification</div>
+        </div>
+      </div>
+
+      <div class="ep-engine-grid">
+        <div class="ep-engine-card">
+          <div class="ep-engine-num">Engine 1</div>
+          <div class="ep-engine-name">8-Tier Incentive Ladder</div>
+          <div class="ep-engine-desc">Redesigned from Sheet 14 CLB total, master policy 250709.01. Entry lowered from 50M to 30M. 6-month accumulation replaces 12-month. Cash replaces travel at lower tiers.</div>
+        </div>
+        <div class="ep-engine-card engine2">
+          <div class="ep-engine-num">Engine 2</div>
+          <div class="ep-engine-name">Portfolio Expansion</div>
+          <div class="ep-engine-desc">Genesis VVIP Club (4 tiers), a2 Organic launch (3-month investment), Summer Promo (10 Jul&ndash;10 Aug 2025). New products and new programs to grow basket size.</div>
+        </div>
+        <div class="ep-engine-card engine3">
+          <div class="ep-engine-num">Engine 3</div>
+          <div class="ep-engine-name">Channel Diversification</div>
+          <div class="ep-engine-desc">MT expansion (Con Cung 500&ndash;700 ASO, Kid Plaza, Bibomart, Avakid). Revised e-com policy (doc 250709.02). CRM &amp; Reward App (10,000 downloads target).</div>
+        </div>
+      </div>
+
+      <!-- ENGINE 1: Full Tier Table -->
+      <div class="ep-accordion">
+        <div class="ep-accordion-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="ep-accordion-icon" style="background:var(--purple);">E1</div>
+          <div class="ep-accordion-title">Engine 1: Full 8-Tier incentive structure<span class="src cs">Chinh s&aacute;ch</span> <span class="ep-accordion-sub">Sheet 14 CLB total, doc 250709.01</span></div>
+          <div class="ep-accordion-toggle">&darr;</div>
+        </div>
+        <div class="ep-accordion-body">
+          <div class="ep-accordion-inner">
+            <ul class="ep-changes-list">
+              <li class="change-purple">Entry tier lowered from 50M &rarr; 30M/month (wider accessibility)</li>
+              <li class="change-purple">Accumulation period shortened from 12 months &rarr; 6 months (faster reward cycle)</li>
+              <li>Cash rewards replace travel at lower tiers (simpler, more immediate)</li>
+            </ul>
+            <div class="ep-sub-title">Tier targets, bonuses &amp; display requirements</div>
+            <div class="ep-table-wrap">
+              <table class="ep-table">
+                <thead><tr><th>Tier</th><th>Monthly Target</th><th>Quarterly Target</th><th>Quarterly Bonus %</th><th>6-Month Target</th><th>6-Month Cash Reward</th><th>Over-Achievement %</th><th>Display (GG)</th><th>Display (PL)</th></tr></thead>
+                <tbody>
+                  <tr><td>M&#7913;c 1</td><td>30M</td><td>90M</td><td>1.8%</td><td>180M</td><td>6,840,000</td><td>3.8%</td><td>4 facings</td><td>4 facings</td></tr>
+                  <tr><td>M&#7913;c 2</td><td>50M</td><td>150M</td><td>2.0%</td><td>300M</td><td>11,700,000</td><td>3.9%</td><td>6 facings</td><td>6 facings</td></tr>
+                  <tr><td>M&#7913;c 3</td><td>100M</td><td>300M</td><td>2.2%</td><td>600M</td><td>24,000,000</td><td>4.0%</td><td>8 facings</td><td>8 facings</td></tr>
+                  <tr><td>M&#7913;c 4</td><td>200M</td><td>600M</td><td>2.4%</td><td>1,200M</td><td>105,000,000</td><td>4.2%</td><td>12 facings</td><td>12 facings</td></tr>
+                  <tr><td>M&#7913;c 5</td><td>350M</td><td>1,050M</td><td>2.6%</td><td>2,100M</td><td>92,400,000</td><td>4.4%</td><td>16 facings</td><td>16 facings</td></tr>
+                  <tr><td>M&#7913;c 6</td><td>500M</td><td>1,500M</td><td>2.8%</td><td>3,000M</td><td>138,000,000</td><td>4.6%</td><td>20 facings</td><td>20 facings</td></tr>
+                  <tr><td>M&#7913;c 7</td><td>1B</td><td>3,000M</td><td>3.2%</td><td>6,000M</td><td>288,000,000</td><td>4.8%</td><td>24 facings</td><td>24 facings</td></tr>
+                  <tr><td>M&#7913;c 8</td><td>2B</td><td>6,000M</td><td>3.5%</td><td>12,000M</td><td>600,000,000</td><td>5.0%</td><td>48 facings</td><td>48 facings</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="ep-sub-title" style="margin-top:24px;">Total investment summary by tier (Sheet 15)</div>
+            <div class="ep-table-wrap">
+              <table class="ep-table compact">
+                <thead><tr><th>Tier</th><th>Discount</th><th>Quarterly</th><th>Yearly</th><th>Tier Total</th><th>Total Channel %</th></tr></thead>
+                <tbody>
+                  <tr><td>M&#7913;c 1</td><td>12.5%</td><td>1.8%</td><td>3.8%</td><td>18.1%</td><td style="font-weight:700;color:var(--purple);">24.9%</td></tr>
+                  <tr><td>M&#7913;c 2</td><td>12.5%</td><td>2.0%</td><td>3.9%</td><td>18.4%</td><td style="font-weight:700;color:var(--purple);">25.2%</td></tr>
+                  <tr><td>M&#7913;c 3</td><td>12.5%</td><td>2.2%</td><td>4.0%</td><td>18.7%</td><td style="font-weight:700;color:var(--purple);">25.7% <span style="font-size:10px;color:var(--text-muted);">(with S9 VIP)</span></td></tr>
+                  <tr><td>M&#7913;c 4</td><td>&mdash;</td><td>2.4%</td><td>4.2%</td><td>6.6%</td><td style="font-weight:700;color:var(--gold);">30.6% <span style="font-size:10px;color:var(--text-muted);">(VIP tier)</span></td></tr>
+                  <tr><td>M&#7913;c 5</td><td>&mdash;</td><td>2.6%</td><td>4.4%</td><td>7.0%</td><td style="font-weight:700;color:var(--gold);">31.6%</td></tr>
+                  <tr><td>M&#7913;c 6</td><td>&mdash;</td><td>2.8%</td><td>4.6%</td><td>7.4%</td><td style="font-weight:700;color:var(--gold);">32.5%</td></tr>
+                  <tr><td>M&#7913;c 7</td><td>&mdash;</td><td>3.2%</td><td>4.8%</td><td>8.0%</td><td style="font-weight:700;color:var(--gold);">34.9%</td></tr>
+                  <tr><td>M&#7913;c 8</td><td>&mdash;</td><td>3.5%</td><td>5.0%</td><td>8.5%</td><td style="font-weight:700;color:var(--gold);">38.0%</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="ep-sub-title" style="margin-top:24px;">VIP tier investment matrix (Sheet 9, tiers &ge; 200M)</div>
+            <div class="ep-table-wrap">
+              <table class="ep-table compact">
+                <thead class="gold-head"><tr><th>Product</th><th>50M</th><th>100M</th><th>200M VIP</th><th>350M VIP</th><th>500M VIP</th><th>1B VIP</th><th>2B VIP</th></tr></thead>
+                <tbody>
+                  <tr><td>a2 PL+Mothers Total</td><td>18.4%</td><td>18.7%</td><td>21.2%</td><td>21.9%</td><td>22.6%</td><td>24.8%</td><td>27.0%</td></tr>
+                  <tr><td>a2 GG Total</td><td>18.4%</td><td>18.7%</td><td>21.2%</td><td>21.9%</td><td>22.6%</td><td>24.8%</td><td>27.0%</td></tr>
+                  <tr><td>a2 Immune Total</td><td>22.9%</td><td>23.2%</td><td>23.2%</td><td>24.4%</td><td>25.1%</td><td>26.0%</td><td>27.0%</td></tr>
+                  <tr><td>a2 UHT 150ml</td><td>22.9%</td><td>23.2%</td><td>23.2%</td><td>24.4%</td><td>25.1%</td><td>26.0%</td><td>27.0%</td></tr>
+                  <tr><td>a2 Organic</td><td>22.9%</td><td>23.2%</td><td>24.2%</td><td>24.4%</td><td>25.1%</td><td>26.0%</td><td>27.0%</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="ep-callout gold" style="margin-top:12px;">
+              <div class="ep-callout-title">Brand focus partnership bonus (VIP 200M+)</div>
+              200M: 2.8% | 350M: 3.2% | 500M: 3.4% | 1B: 3.6% | 2B: 3.8%
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENGINE 2: Portfolio Expansion -->
+      <div class="ep-accordion">
+        <div class="ep-accordion-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="ep-accordion-icon" style="background:var(--gold);">E2</div>
+          <div class="ep-accordion-title">Engine 2: Portfolio expansion<span class="src cs">Chinh s&aacute;ch</span> <span class="ep-accordion-sub">Genesis VVIP, Organic launch, Summer promo</span></div>
+          <div class="ep-accordion-toggle">&darr;</div>
+        </div>
+        <div class="ep-accordion-body">
+          <div class="ep-accordion-inner">
+            <div class="ep-sub-title gold-accent">Genesis VVIP Club (4 tiers)</div>
+            <div class="ep-table-wrap">
+              <table class="ep-table">
+                <thead class="gold-head"><tr><th></th><th>M&#7913;c 1</th><th>M&#7913;c 2</th><th>M&#7913;c 3</th><th>M&#7913;c 4</th></tr></thead>
+                <tbody>
+                  <tr><td style="font-weight:600;">Entry gift</td><td>48M (5 cases)</td><td>96M (10 cases)</td><td>144M (15 cases)</td><td>192M (20 cases)</td></tr>
+                  <tr><td style="font-weight:600;">Base discount</td><td>17%</td><td>8+1</td><td>8+1</td><td>8+1</td></tr>
+                  <tr><td style="font-weight:600;">MKT monthly</td><td>3%</td><td>4%</td><td>5%</td><td>6%</td></tr>
+                  <tr><td style="font-weight:600;">Quarterly bonus</td><td>3%</td><td>3.5%</td><td>4%</td><td>4.5%</td></tr>
+                  <tr><td style="font-weight:600;">Sale support</td><td>1%</td><td>2%</td><td>2.5%</td><td>3%</td></tr>
+                  <tr class="ep-total-row"><td>Total invest</td><td>18.1%</td><td>20.6%</td><td>22.6%</td><td>24.6%</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="ep-callout purple" style="font-size:13px;">
+              <strong>Requirements:</strong> 2 livestreams/month, 2 clips &gt;1 min, 4 social posts/month
+            </div>
+
+            <div class="ep-sub-title gold-accent" style="margin-top:24px;">a2 Organic Launch (3-month investment)</div>
+            <div class="ep-table-wrap">
+              <table class="ep-table compact">
+                <thead class="gold-head"><tr><th></th><th>M&#7913;c 1</th><th>M&#7913;c 2</th><th>M&#7913;c 3</th><th>M&#7913;c 4</th></tr></thead>
+                <tbody>
+                  <tr><td style="font-weight:600;">Entry gift</td><td>24.6M (5 cases)</td><td>49.2M (10)</td><td>73.8M (15)</td><td>98.4M (20)</td></tr>
+                  <tr><td style="font-weight:600;">MKT invest</td><td>3%</td><td>4%</td><td>5%</td><td>6%</td></tr>
+                  <tr><td style="font-weight:600;">Affiliate</td><td>2%</td><td>2.5%</td><td>3%</td><td>3.5%</td></tr>
+                  <tr class="ep-total-row"><td>Total</td><td>5%</td><td>6.5%</td><td>8%</td><td>9.5%</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="ep-callout gold" style="font-size:13px;">
+              <strong>a2 Organic new product:</strong> 750,000 VND/900g can. 17% total discount (12.5% base + 2% compliance + 2.5% MKT).
+            </div>
+
+            <div class="ep-sub-title gold-accent" style="margin-top:24px;">Summer Promo (10 Jul &ndash; 10 Aug 2025)</div>
+            <div class="ep-callout amber" style="font-size:13px;">
+              <strong>Doc 250709.03</strong><br>
+              Trade: Buy 2 PL cases &rarr; get 1 UHT case free.<br>
+              Consumer: Buy 1 PL can &rarr; get 2 UHT boxes.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENGINE 3: Channel Diversification -->
+      <div class="ep-accordion">
+        <div class="ep-accordion-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="ep-accordion-icon" style="background:var(--green-safe);">E3</div>
+          <div class="ep-accordion-title">Engine 3: Channel diversification<span class="src cs">Chinh s&aacute;ch</span> <span class="ep-accordion-sub">MT expansion, e-com, CRM app</span></div>
+          <div class="ep-accordion-toggle">&darr;</div>
+        </div>
+        <div class="ep-accordion-body">
+          <div class="ep-accordion-inner">
+            <div class="ep-sub-title green-accent">MT Expansion</div>
+            <div class="ep-table-wrap">
+              <table class="ep-table compact">
+                <thead class="green-head"><tr><th>Chain</th><th>Target</th><th>Timeline</th></tr></thead>
+                <tbody>
+                  <tr><td style="font-weight:600;">Con Cung</td><td>500&ndash;700 ASO (Platinum tier)</td><td>Expand from Jul</td></tr>
+                  <tr><td style="font-weight:600;">Kid Plaza</td><td>New listing</td><td>Jul 2025</td></tr>
+                  <tr><td style="font-weight:600;">Bibomart</td><td>New listing</td><td>Jul 2025</td></tr>
+                  <tr><td style="font-weight:600;">Avakid</td><td>New listing</td><td>TBD</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="ep-sub-title green-accent" style="margin-top:24px;">E-commerce &mdash; Revised GG TM&#272;T policy (doc 250709.02)</div>
+            <div class="ep-callout green" style="font-size:13px;">
+              <strong>20% total discount</strong> = 8% base + 7% platform ops + 5% MKT.<br>
+              Retail prices ~6% higher (757,900 vs 715,000 for GG1).<br>
+              Cash at M&#7913;c 1: 23.4M VND. Over-achievement: 3.9%&ndash;4.8%.
+            </div>
+
+            <div class="ep-sub-title green-accent" style="margin-top:24px;">CRM &amp; Reward App</div>
+            <div class="ep-deliver-grid">
+              <div class="ep-deliver-card">
+                <div class="ep-deliver-stat">10,000</div>
+                <div class="ep-deliver-desc">Downloads target</div>
+              </div>
+              <div class="ep-deliver-card">
+                <div class="ep-deliver-stat">5,000</div>
+                <div class="ep-deliver-desc">Monthly active users (MAU)</div>
+              </div>
+              <div class="ep-deliver-card">
+                <div class="ep-deliver-stat">20%</div>
+                <div class="ep-deliver-desc">Redemption rate target</div>
+              </div>
+              <div class="ep-deliver-card">
+                <div class="ep-deliver-stat" style="color:var(--gold);">500M</div>
+                <div class="ep-deliver-desc">CRM budget (Mid scenario, VND)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /ACT 2 -->
+
+    <!-- ===== ACT 3: THE INVESTMENT ASK ===== -->
+    <div class="ep-act" id="ep-act3">
+      <div class="ep-act-header">
+        <div class="ep-act-num act3">3</div>
+        <div class="ep-act-title-wrap">
+          <div class="ep-act-title">The Investment Ask &mdash; 311.9B VND (30.9% of sell-out)</div>
+          <div class="ep-act-tagline">Livewell 213.8B (23.9%) + a2MC 98.1B (11.0%)</div>
+        </div>
+      </div>
+
+      <!-- Total investment headline -->
+      <div class="ep-invest-split">
+        <div class="ep-invest-box lw">
+          <div class="ep-invest-val">213.8B</div>
+          <div class="ep-invest-label">Livewell (23.9% of sell-out)</div>
+        </div>
+        <div class="ep-invest-box a2mc">
+          <div class="ep-invest-val">98.1B</div>
+          <div class="ep-invest-label">a2MC (11.0% of sell-out)</div>
+        </div>
+      </div>
+
+      <!-- Investment by channel -->
+      <div class="ep-accordion">
+        <div class="ep-accordion-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="ep-accordion-icon" style="background:var(--gold);">CH</div>
+          <div class="ep-accordion-title">Investment by channel<span class="src cs">Chinh s&aacute;ch</span> <span class="ep-accordion-sub">D2C 32.1% | Sub-D 31.5% | Total GT 32.0%</span></div>
+          <div class="ep-accordion-toggle">&darr;</div>
+        </div>
+        <div class="ep-accordion-body">
+          <div class="ep-accordion-inner">
+            <div class="ep-table-wrap">
+              <table class="ep-table">
+                <thead class="gold-head"><tr><th>Channel</th><th>Sell OUT</th><th>Budget</th><th>LW %</th><th>a2MC %</th><th>Total %</th></tr></thead>
+                <tbody>
+                  <tr><td style="font-weight:600;">D2C Keyshop</td><td>645.0B</td><td>207.0B</td><td>21.0%</td><td>11.1%</td><td style="font-weight:700;color:var(--purple);">32.1%</td></tr>
+                  <tr><td style="font-weight:600;">Sub-D Keyshop</td><td>208.7B</td><td>65.8B</td><td>21.0%</td><td>10.5%</td><td style="font-weight:700;color:var(--purple);">31.5%</td></tr>
+                  <tr class="ep-total-row"><td>Total GT</td><td>853.7B</td><td>272.8B</td><td>21.0%</td><td>10.9%</td><td>32.0%</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Investment by component -->
+      <div class="ep-accordion">
+        <div class="ep-accordion-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="ep-accordion-icon" style="background:var(--purple);">$$</div>
+          <div class="ep-accordion-title">Investment by component (% of sell-out)<span class="src cs">Chinh s&aacute;ch</span> <span class="ep-accordion-sub">Discount, incentives, sale support, partnership</span></div>
+          <div class="ep-accordion-toggle">&darr;</div>
+        </div>
+        <div class="ep-accordion-body">
+          <div class="ep-accordion-inner">
+            <div class="ep-table-wrap">
+              <table class="ep-table compact">
+                <thead><tr><th>Component</th><th>L1</th><th>L2</th><th>L3</th><th>L4</th><th>L5</th><th>L6</th><th>L7</th><th>L8</th><th>Source</th></tr></thead>
+                <tbody>
+                  <tr><td style="font-weight:600;">Discount on invoice</td><td>12.5%</td><td>12.5%</td><td>17.0%</td><td>17.5%</td><td>18.0%</td><td>20.0%</td><td>22.0%</td><td>22.0%</td><td style="color:var(--purple);font-weight:600;">Livewell</td></tr>
+                  <tr><td style="font-weight:600;">Quarterly incentive</td><td>2.0%</td><td>2.2%</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td style="color:var(--purple);font-weight:600;">Livewell</td></tr>
+                  <tr><td style="font-weight:600;">Yearly incentive</td><td>3.9%</td><td>4.0%</td><td>4.25%</td><td>4.4%</td><td>4.6%</td><td>4.8%</td><td>5.0%</td><td>5.5%</td><td style="color:var(--gold);font-weight:600;">a2MC</td></tr>
+                  <tr><td style="font-weight:600;">Yearly incentive ops</td><td>1.5%</td><td>1.5%</td><td>1.5%</td><td>1.5%</td><td>1.5%</td><td>1.5%</td><td>1.5%</td><td>1.5%</td><td style="color:var(--gold);font-weight:600;">a2MC</td></tr>
+                  <tr><td style="font-weight:600;">Sale support</td><td>5.0%</td><td>5.0%</td><td>5.0%</td><td>5.0%</td><td>5.0%</td><td>5.0%</td><td>5.0%</td><td>5.0%</td><td style="color:var(--gold);font-weight:600;">a2MC</td></tr>
+                  <tr><td style="font-weight:600;">Partnership</td><td>&mdash;</td><td>&mdash;</td><td>2.8%</td><td>3.2%</td><td>3.4%</td><td>3.6%</td><td>3.8%</td><td>4.0%</td><td style="color:var(--purple);font-weight:600;">Livewell</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- a2MC NZD budget -->
+      <div class="ep-accordion">
+        <div class="ep-accordion-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="ep-accordion-icon" style="background:var(--gold);">NZ</div>
+          <div class="ep-accordion-title">a2MC &rarr; Livewell supply cost (3 scenarios, NZD)<span class="src cs">Chinh s&aacute;ch</span> <span class="ep-accordion-sub">Investment = 3.12%&ndash;5.55% of supply cost</span></div>
+          <div class="ep-accordion-toggle">&darr;</div>
+        </div>
+        <div class="ep-accordion-body">
+          <div class="ep-accordion-inner">
+            <div class="ep-nzd-grid">
+              <div class="ep-nzd-card">
+                <div class="ep-nzd-scenario">Min</div>
+                <div class="ep-nzd-val">15.4M NZD</div>
+                <div class="ep-nzd-pct">a2MC &rarr; LW: 15,401,835 NZD<br>a2MC investment: 479,794 NZD<br><strong>3.12% of supply cost</strong></div>
+              </div>
+              <div class="ep-nzd-card mid">
+                <div class="ep-nzd-scenario">Mid</div>
+                <div class="ep-nzd-val">17.1M NZD</div>
+                <div class="ep-nzd-pct">a2MC &rarr; LW: 17,068,794 NZD<br>a2MC investment: 871,262 NZD<br><strong>5.10% of supply cost</strong></div>
+              </div>
+              <div class="ep-nzd-card">
+                <div class="ep-nzd-scenario">Max</div>
+                <div class="ep-nzd-val">20.1M NZD</div>
+                <div class="ep-nzd-pct">a2MC &rarr; LW: 20,146,397 NZD<br>a2MC investment: 1,117,357 NZD<br><strong>5.55% of supply cost</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MKT Budget line items -->
+      <div class="ep-accordion">
+        <div class="ep-accordion-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="ep-accordion-icon" style="background:var(--purple-light);">MK</div>
+          <div class="ep-accordion-title">MKT budget FY27 line items (Mid scenario, VND)<span class="src cs">Chinh s&aacute;ch</span> <span class="ep-accordion-sub">IMC 15.2B + Trade 7.85B + New Chain 2.2B + Incentive 1.96B</span></div>
+          <div class="ep-accordion-toggle">&darr;</div>
+        </div>
+        <div class="ep-accordion-body">
+          <div class="ep-accordion-inner">
+            <div class="ep-split-grid">
+              <div>
+                <div class="ep-sub-title">IMC &mdash; 15.2B total</div>
+                <div class="ep-table-wrap">
+                  <table class="ep-table compact">
+                    <thead><tr><th>Line Item</th><th>Budget (VND)</th></tr></thead>
+                    <tbody>
+                      <tr><td>AOC Social</td><td>5.5B</td></tr>
+                      <tr><td>WOM</td><td>1.8B</td></tr>
+                      <tr><td>Mom Club</td><td>548M</td></tr>
+                      <tr><td>HCP Seminar</td><td>500M</td></tr>
+                      <tr><td>KOC/Affiliate</td><td>500M</td></tr>
+                      <tr><td>Newborn Combo</td><td>600M</td></tr>
+                      <tr><td>Maternity Sampling</td><td>1.6B</td></tr>
+                      <tr><td>Mama Class</td><td>900M</td></tr>
+                      <tr><td>VBB Fair</td><td>1.5B</td></tr>
+                      <tr><td>GG Communication</td><td>1.8B</td></tr>
+                      <tr><td>CRM App</td><td>500M</td></tr>
+                      <tr class="ep-total-row"><td>Total IMC</td><td>15.2B</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div>
+                <div class="ep-sub-title">Trade &mdash; 7.85B total</div>
+                <div class="ep-table-wrap">
+                  <table class="ep-table compact">
+                    <thead><tr><th>Line Item</th><th>Budget (VND)</th></tr></thead>
+                    <tbody>
+                      <tr><td>Sell-out campaigns</td><td>5.5B</td></tr>
+                      <tr><td>Keyshop branding</td><td>138M</td></tr>
+                      <tr><td>Big events</td><td>1.74B</td></tr>
+                      <tr><td>Training</td><td>473M</td></tr>
+                      <tr class="ep-total-row"><td>Total Trade</td><td>7.85B</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="ep-sub-title" style="margin-top:20px;">New Chain &mdash; 2.2B total</div>
+                <div class="ep-table-wrap">
+                  <table class="ep-table compact">
+                    <thead><tr><th>Chain</th><th>Budget (VND)</th></tr></thead>
+                    <tbody>
+                      <tr><td>Con Cung</td><td>1.1B</td></tr>
+                      <tr><td>Kid Plaza</td><td>550M</td></tr>
+                      <tr><td>Bibomart</td><td>550M</td></tr>
+                      <tr class="ep-total-row"><td>Total New Chain</td><td>2.2B</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="ep-callout purple" style="margin-top:12px;font-size:13px;">
+                  <strong>Sale Incentive (Growth Bonus):</strong> 1.96B
+                </div>
+              </div>
+            </div>
+
+            <div class="ep-callout amber" style="margin-top:16px;">
+              <div class="ep-callout-title">FY26 signal: a2MC shifted investment mix</div>
+              a2MC shifted ~10B from IMC (cut from 18.9B &rarr; 9.0B) to Trade keyshop contracts (added 23.3B). Total maintained at ~36.2B. <strong>Message:</strong> measurable trade ROI over brand awareness.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /ACT 3 -->
+
+    <!-- ===== ACT 4: THE DELIVERY BRIDGE ===== -->
+    <div class="ep-act" id="ep-act4">
+      <div class="ep-act-header">
+        <div class="ep-act-num act4">4</div>
+        <div class="ep-act-title-wrap">
+          <div class="ep-act-title">The Delivery Bridge &mdash; This plan IS the action plan</div>
+          <div class="ep-act-tagline">515 named accounts = the delivery mechanism, not an aspiration</div>
+        </div>
+      </div>
+
+      <div class="ep-callout green" style="font-size:15px;font-weight:500;">
+        The commercial plan IS the action plan to deliver the PBI targets. 515 accounts = the delivery mechanism. Each account has a named tier and a specific annual target. The board makes the final decision &mdash; this is the commercial team&rsquo;s comprehensive proposal.
+      </div>
+
+      <div class="ep-deliver-grid" style="margin-top:20px;">
+        <div class="ep-deliver-card">
+          <div class="ep-deliver-stat">359 &rarr; 514</div>
+          <div class="ep-deliver-desc"><strong>+43% account growth</strong> = PRESSURE DILUTION strategy. Spread the target across more customers instead of squeezing existing ones harder.</div>
+        </div>
+        <div class="ep-deliver-card">
+          <div class="ep-deliver-stat">895.2B sell-out</div>
+          <div class="ep-deliver-desc">Building block is <strong>product-agnostic</strong> &mdash; tier targets measure total sell-out. NPD (Genesis HMO, Organic) are growth enablers assumed in the plan. Sell-in column left blank by commercial team.</div>
+        </div>
+      </div>
+
+      <!-- Channel mix -->
+      <div class="exec-detail-box" style="margin-top:20px;">
+        <div class="exec-detail-title">Channel mix (sell-out)<span class="src cs">Chinh s&aacute;ch</span></div>
+        <div class="ep-channel-bar">
+          <div style="width:83.6%; background:var(--purple);"></div>
+          <div style="width:13.4%; background:var(--purple-light);"></div>
+          <div style="width:2.5%; background:var(--gold);"></div>
+          <div style="width:0.5%; background:#B0BEC5;"></div>
+        </div>
+        <div class="ep-channel-legend">
+          <div class="ep-channel-legend-item"><div class="ep-channel-legend-dot" style="background:var(--purple);"></div>GT 83.6% (859B)</div>
+          <div class="ep-channel-legend-item"><div class="ep-channel-legend-dot" style="background:var(--purple-light);"></div>MT 13.4% (137B)</div>
+          <div class="ep-channel-legend-item"><div class="ep-channel-legend-dot" style="background:var(--gold);"></div>E-com 2.5% (26B)</div>
+          <div class="ep-channel-legend-item"><div class="ep-channel-legend-dot" style="background:#B0BEC5;"></div>HC 0.5% (5B)</div>
+        </div>
+        <div style="margin-top:16px;">
+          <div class="exec-tier-row">
+            <div class="exec-tier-label" style="width:100px;">GT D2C</div>
+            <div class="exec-tier-bar"><div class="exec-tier-fill" style="width:62.5%; background:var(--purple);">62.5% of GT</div></div>
+          </div>
+          <div class="exec-tier-row">
+            <div class="exec-tier-label" style="width:100px;">GT Sub-D</div>
+            <div class="exec-tier-bar"><div class="exec-tier-fill" style="width:37.5%; background:var(--purple-light);">37.5% of GT</div></div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /ACT 4 -->
+
+    <!-- ===== ACT 5: EXECUTION CALENDAR ===== -->
+    <div class="ep-act" id="ep-act5">
+      <div class="ep-act-header">
+        <div class="ep-act-num act5">5</div>
+        <div class="ep-act-title-wrap">
+          <div class="ep-act-title">Execution Calendar &mdash; 12-month roadmap (Sheet 8)</div>
+          <div class="ep-act-tagline">Every month, every track &mdash; GT, MT, Marketing, GWP</div>
+        </div>
+      </div>
+
+      <!-- GT Channel Calendar Grid -->
+      <div class="ep-sub-title">GT Channel &mdash; Month by month</div>
+      <div class="ep-calendar">
+        <div class="ep-cal-month">
+          <div class="ep-cal-month-name">Jul</div>
+          <span class="ep-cal-tag campaign">Sign new contract</span>
+          <span class="ep-cal-tag npd">Launch a2 Organic</span>
+          <span class="ep-cal-tag trade">Contract renewal comp</span>
+        </div>
+        <div class="ep-cal-month">
+          <div class="ep-cal-month-name">Aug</div>
+          <div class="ep-cal-occasion">Summer</div>
+          <span class="ep-cal-tag campaign">Summer GWP campaign</span>
+          <span class="ep-cal-tag trade">GWP + merch comp</span>
+          <span class="ep-cal-tag npd">Genesis</span>
+        </div>
+        <div class="ep-cal-month">
+          <div class="ep-cal-month-name">Sep</div>
+          <div class="ep-cal-occasion">Nat&rsquo;l Day, Mid-Autumn, Birth</div>
+          <span class="ep-cal-tag campaign">Korea tour</span>
+          <span class="ep-cal-tag trade">Mid-Autumn campaign</span>
+        </div>
+        <div class="ep-cal-month">
+          <div class="ep-cal-month-name">Oct</div>
+          <div class="ep-cal-occasion">Woman Day</div>
+          <span class="ep-cal-tag campaign">VBB fair HN</span>
+          <span class="ep-cal-tag campaign">Australia tour</span>
+          <span class="ep-cal-tag trade">Megalive at VBBF</span>
+          <span class="ep-cal-tag npd">UHT</span>
+        </div>
+        <div class="ep-cal-month">
+          <div class="ep-cal-month-name">Nov</div>
+          <div class="ep-cal-occasion">Teacher Day</div>
+          <span class="ep-cal-tag campaign">First teacher campaign</span>
+          <span class="ep-cal-tag trade">Display/minigame</span>
+        </div>
+        <div class="ep-cal-month">
+          <div class="ep-cal-month-name">Dec</div>
+          <div class="ep-cal-occasion">Christmas, NY, H1 summary</div>
+          <span class="ep-cal-tag campaign">Celebration campaign</span>
+          <span class="ep-cal-tag trade">Christmas display/comm</span>
+        </div>
+        <div class="ep-cal-month">
+          <div class="ep-cal-month-name">Jan</div>
+          <div class="ep-cal-occasion">T&#7871;t holiday</div>
+          <span class="ep-cal-tag campaign">T&#7871;t holiday</span>
+          <span class="ep-cal-tag trade">Gift for T&#7871;t, Happy NY</span>
+        </div>
+        <div class="ep-cal-month">
+          <div class="ep-cal-month-name">Feb</div>
+          <div class="ep-cal-occasion">T&#7871;t (6/2/2027)</div>
+          <span class="ep-cal-tag campaign">T&#7871;t holiday</span>
+        </div>
+        <div class="ep-cal-month">
+          <div class="ep-cal-month-name">Mar</div>
+          <div class="ep-cal-occasion">Woman Day</div>
+          <span class="ep-cal-tag campaign">L&igrave; x&igrave;</span>
+          <span class="ep-cal-tag trade">L&igrave; x&igrave; campaign</span>
+        </div>
+        <div class="ep-cal-month">
+          <div class="ep-cal-month-name">Apr</div>
+          <div class="ep-cal-occasion">Labor Day</div>
+          <span class="ep-cal-tag campaign">Labor Day</span>
+        </div>
+        <div class="ep-cal-month">
+          <div class="ep-cal-month-name">May</div>
+          <span class="ep-cal-tag campaign">Summer</span>
+        </div>
+        <div class="ep-cal-month">
+          <div class="ep-cal-month-name">Jun</div>
+          <div class="ep-cal-occasion">Children Day, Summer</div>
+          <span class="ep-cal-tag campaign">VBB fair HCM</span>
+          <span class="ep-cal-tag trade">End contract</span>
+        </div>
+      </div>
+
+      <!-- MT Channel Calendar -->
+      <div class="ep-accordion">
+        <div class="ep-accordion-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="ep-accordion-icon" style="background:#1565C0;">MT</div>
+          <div class="ep-accordion-title">MT channel calendar (Con Cung focus + other MT)<span class="src cs">Chinh s&aacute;ch</span> <span class="ep-accordion-sub">8 major activations</span></div>
+          <div class="ep-accordion-toggle">&darr;</div>
+        </div>
+        <div class="ep-accordion-body">
+          <div class="ep-accordion-inner">
+            <div class="ep-table-wrap">
+              <table class="ep-table">
+                <thead style="background:#1565C0;"><tr style="color:white;"><th>Month</th><th>Con Cung Activity</th><th>Other MT</th></tr></thead>
+                <tbody>
+                  <tr><td style="font-weight:600;">Jul</td><td>Expand ASO Platinum 500&ndash;700 stores + MKT + GG listing</td><td>Kid Plaza listing, Bibomart listing</td></tr>
+                  <tr><td style="font-weight:600;">Aug</td><td>GWP Platinum + GG training</td><td>&mdash;</td></tr>
+                  <tr><td style="font-weight:600;">Sep</td><td>Sale contest</td><td>&mdash;</td></tr>
+                  <tr><td style="font-weight:600;">Oct</td><td>GWP Gentle Gold</td><td>Avakid</td></tr>
+                  <tr><td style="font-weight:600;">Dec</td><td>Christmas</td><td>&mdash;</td></tr>
+                  <tr><td style="font-weight:600;">Jan</td><td>T&#7871;t + top customer specials</td><td>&mdash;</td></tr>
+                  <tr><td style="font-weight:600;">Mar</td><td>GWP Gentle Gold</td><td>&mdash;</td></tr>
+                  <tr><td style="font-weight:600;">May</td><td>GWP Platinum</td><td>&mdash;</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Marketing Calendar -->
+      <div class="ep-accordion">
+        <div class="ep-accordion-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="ep-accordion-icon" style="background:#C62828;">MK</div>
+          <div class="ep-accordion-title">Marketing calendar &mdash; 4-funnel structure<span class="src cs">Chinh s&aacute;ch</span> <span class="ep-accordion-sub">Awareness &rarr; Consideration &rarr; Converting &rarr; Loyalty</span></div>
+          <div class="ep-accordion-toggle">&darr;</div>
+        </div>
+        <div class="ep-accordion-body">
+          <div class="ep-accordion-inner">
+            <div class="ep-cal-tracks">
+              <div class="ep-cal-track">
+                <div class="ep-cal-track-name red">AWARENESS &mdash; All year</div>
+                <div class="ep-callout purple" style="font-size:13px;padding:14px 18px;">
+                  Digital always-on + Social outreach (continuous, 12 months)
+                </div>
+              </div>
+              <div class="ep-cal-track">
+                <div class="ep-cal-track-name gold">CONSIDERATION</div>
+                <div class="ep-table-wrap">
+                  <table class="ep-table compact">
+                    <thead class="gold-head"><tr><th>Activity</th><th>Timing</th></tr></thead>
+                    <tbody>
+                      <tr><td>Mama Class</td><td>Sep&ndash;Dec</td></tr>
+                      <tr><td>Seminar (North)</td><td>Sep</td></tr>
+                      <tr><td>Seminar (Central)</td><td>Jan</td></tr>
+                      <tr><td>Mall events</td><td>Aug</td></tr>
+                      <tr><td>Macro activation &mdash; Sport MZ</td><td>Jul</td></tr>
+                      <tr><td>Macro activation &mdash; F&amp;B</td><td>Dec</td></tr>
+                      <tr><td>Macro activation &mdash; Sport Family</td><td>Jun</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="ep-cal-track">
+                <div class="ep-cal-track-name green">CONVERTING &mdash; All year</div>
+                <div class="ep-callout green" style="font-size:13px;padding:14px 18px;">
+                  Newborn combo + Voucher convert (continuous, 12 months)
+                </div>
+              </div>
+              <div class="ep-cal-track">
+                <div class="ep-cal-track-name blue">LOYALTY</div>
+                <div class="ep-table-wrap">
+                  <table class="ep-table compact">
+                    <thead style="background:#1565C0;"><tr style="color:white;"><th>Activity</th><th>Timing</th></tr></thead>
+                    <tbody>
+                      <tr><td>CRM rewards</td><td>Oct onwards</td></tr>
+                      <tr><td>Community workshops</td><td>Sep, Dec, Mar, Jun</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GWP Schedule -->
+      <div class="ep-accordion">
+        <div class="ep-accordion-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="ep-accordion-icon" style="background:#E65100;">GW</div>
+          <div class="ep-accordion-title">GWP &amp; POSM schedule<span class="src cs">Chinh s&aacute;ch</span> <span class="ep-accordion-sub">Gift-with-purchase by product line + POSM refresh dates</span></div>
+          <div class="ep-accordion-toggle">&darr;</div>
+        </div>
+        <div class="ep-accordion-body">
+          <div class="ep-accordion-inner">
+            <div class="ep-table-wrap">
+              <table class="ep-table compact">
+                <thead style="background:#E65100;"><tr style="color:white;"><th>Product/Activity</th><th>Timing</th></tr></thead>
+                <tbody>
+                  <tr><td style="font-weight:600;">Genesis GWP</td><td>Aug</td></tr>
+                  <tr><td style="font-weight:600;">PL GWP</td><td>Aug, Dec, May</td></tr>
+                  <tr><td style="font-weight:600;">GG GWP</td><td>Oct, Mar</td></tr>
+                  <tr><td style="font-weight:600;">Partnership GWP</td><td>Jul&ndash;Oct</td></tr>
+                  <tr><td style="font-weight:600;">POSM refresh</td><td>Aug, Oct, Jan, Jun</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /ACT 5 -->
+
+  </div>
+</section>
+
+<div class="wave-divider wave-white"><svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,80 L0,80 Z"/></svg></div>
+
 <!-- Product Family Revenue Mix -->
 <section class="family-section">
   <div class="section-center">
-    <h2 class="section-title" style="font-size: 24px; margin-bottom: 8px;">Revenue by product family</h2>
+    <h2 class="section-title" style="font-size: 24px; margin-bottom: 8px;">Revenue by product family<span class="src pbi">PBI</span></h2>
     <p class="section-subtitle" style="margin-bottom: 28px;">Share of monthly weighted run rate (31.2B VND/month). Platinum dominates &mdash; concentration risk and growth engine in one.</p>
     <div class="family-grid">
       <div class="family-card"><div class="family-name">PL</div><div class="family-pct">~61%</div><div class="family-role">Platinum &mdash; core</div></div>
@@ -422,7 +1448,7 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
   <div class="supply-alert">
     <div class="supply-header">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D32F2F" stroke-width="2"><path d="M12 2L2 22h20L12 2z"/><line x1="12" y1="10" x2="12" y2="14"/><circle cx="12" cy="18" r="0.5" fill="#D32F2F"/></svg>
-      <h3>Supply chain status &mdash; 6 May 2026</h3>
+      <h3>Supply chain status &mdash; 6 May 2026<span class="src pbi">PBI</span></h3>
     </div>
     <div class="supply-grid">
       <div class="supply-stat critical"><div class="stat-num">4</div><div class="stat-label">Critical (&lt; 1 month stock)</div></div>
@@ -449,7 +1475,7 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
 <!-- Model Guide — How to Read the Power BI Report -->
 <section class="guide-section" id="model-guide">
   <div class="section-center">
-    <h2 class="section-title">How to read the live model</h2>
+    <h2 class="section-title">How to read the live model<span class="src pbi">PBI</span></h2>
     <p class="section-subtitle">The Power BI report below has 5 interconnected pages. Each one answers a different business question. Here is what they show and what to look for &mdash; with today&rsquo;s live numbers.</p>
 
     <!-- Flow Diagram -->
@@ -695,7 +1721,9 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
       <div class="glossary-item"><div class="glossary-term">Challenge III (790B)</div><div class="glossary-def">FY2027 at +55% volume growth vs current run rate, same pricing. Maximum volume push &mdash; the ceiling of organic growth.</div></div>
       <div class="glossary-item"><div class="glossary-term">Year-over-Year (%)</div><div class="glossary-def">FY2027 target divided by FY2026 forecast, minus 1. Example: 623B &divide; 446B &minus; 1 = +39.7%.</div></div>
       <div class="glossary-item"><div class="glossary-term">Stock coverage</div><div class="glossary-def">Months of inventory remaining at current sell-through rate. Below 1 month = critical, 1&ndash;2.5 months = monitor, above 2.5 = safe.</div></div>
-      <div class="glossary-item"><div class="glossary-term">&ldquo;Live&rdquo; values</div><div class="glossary-def">Numbers that update automatically in the Power BI model. Static values on this page reflect 16 May 2026. Refresh when data updates.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Sell OUT vs Sell IN</div><div class="glossary-def">Sell OUT = retail price to consumer. Sell IN = Livewell&rsquo;s invoice revenue from customers (after on-invoice discounts of 12.5&ndash;22%). PBI model tracks Sell IN; commercial plan targets Sell OUT (895.2B). Sell-in column was left blank by the commercial team.</div></div>
+      <div class="glossary-item"><div class="glossary-term">Commercial plan (895.2B)</div><div class="glossary-def">Bottom-up execution plan from Livewell commercial team. 514 GT accounts &times; 8 tier levels = 895.2B sell-out at retail prices. Building block is product-agnostic &mdash; NPD (Genesis, Organic) are assumed enablers. Total investment: 311.9B (LW 213.8B + a2MC 98.1B).</div></div>
+      <div class="glossary-item"><div class="glossary-term">&ldquo;Live&rdquo; values</div><div class="glossary-def">Numbers that update automatically in the Power BI model. Static values on this page reflect 11 June 2026. Refresh when data updates.</div></div>
     </div>
   </div>
 </section>
@@ -705,14 +1733,14 @@ body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--
 <section class="closing-section">
   <div class="closing-glow"></div>
   <div class="closing-content">
-    <h2 class="closing-headline">446B confirmed.<br>Now <em>choose the ambition.</em></h2>
-    <p class="closing-subtext">Contract exceeded. 360B in the bank with two months to go. Three FY2027 challenge targets from 623B to 790B &mdash; explore the live model to decide which ambition fits.</p>
+    <h2 class="closing-headline">446B confirmed.<br>Execution plan <em>ready for board review.</em></h2>
+    <p class="closing-subtext">Contract exceeded. The commercial team&rsquo;s bottom-up plan targets 895.2B sell-out across 514 GT accounts &mdash; with NPD (Genesis, Organic) as assumed enablers. Sell-in conversion depends on discount tier mix (12.5&ndash;22%). The board decides which scenario ceiling to resource. Explore the live model to track progress.</p>
     <a href="https://app.powerbi.com/view?r=eyJrIjoiYjc0NTE1YzItNGU5OC00YjU2LTg5YTAtNWNkOWYzYjAwODk2IiwidCI6IjZhMzM4ODRkLThjNjctNDUwYy04YjgyLTc2MjczNjBlZGJhNCJ9" target="_blank" rel="noopener" class="btn-primary">Open Full-Screen Model</a>
     <a href="#powerbi" class="btn-outline">Scroll to Embedded Report</a>
   </div>
 </section>
 
-<div class="footer-bar">a2 Milk&reg; Vietnam | Livewell Distribution | FY27 Forecast Briefing | Confidential | Updated 16 May 2026</div>
+<div class="footer-bar">a2 Milk&reg; Vietnam | Livewell Distribution | FY27 Forecast Briefing | Confidential | Updated 11 June 2026</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -752,6 +1780,28 @@ gsap.set(".ch-card",{opacity:0,y:35,scale:0.94});
 gsap.to(".ch-card",{scrollTrigger:{trigger:".challenge-section",start:"top 70%"},opacity:1,y:0,scale:1,duration:0.6,stagger:0.12,ease:"back.out(1.3)"});
 
 gsap.from(".supply-alert",{scrollTrigger:{trigger:".supply-section",start:"top 75%"},opacity:0,x:-40,duration:0.7,ease:"power3.out"});
+
+gsap.set(".exec-card",{opacity:0,y:30,scale:0.95});
+gsap.to(".exec-card",{scrollTrigger:{trigger:".exec-section",start:"top 72%"},opacity:1,y:0,scale:1,duration:0.5,stagger:0.1,ease:"back.out(1.2)"});
+gsap.from(".exec-detail-grid",{scrollTrigger:{trigger:".exec-detail-grid",start:"top 78%"},opacity:0,y:30,duration:0.7,ease:"power3.out"});
+
+// Execution Plan expansion animations
+gsap.set(".ep-act-header",{opacity:0,x:-30});
+document.querySelectorAll(".ep-act").forEach(function(act){
+  gsap.to(act.querySelector(".ep-act-header"),{scrollTrigger:{trigger:act,start:"top 78%"},opacity:1,x:0,duration:0.6,ease:"power3.out"});
+});
+gsap.set(".ep-engine-card",{opacity:0,y:30,scale:0.95});
+gsap.to(".ep-engine-card",{scrollTrigger:{trigger:".ep-engine-grid",start:"top 78%"},opacity:1,y:0,scale:1,duration:0.5,stagger:0.12,ease:"back.out(1.2)"});
+gsap.set(".ep-accordion",{opacity:0,y:20});
+gsap.to(".ep-accordion",{scrollTrigger:{trigger:"#ep-act1",start:"top 60%"},opacity:1,y:0,duration:0.45,stagger:0.08,ease:"power2.out"});
+gsap.set(".ep-invest-box",{opacity:0,y:25,scale:0.96});
+gsap.to(".ep-invest-box",{scrollTrigger:{trigger:"#ep-act3",start:"top 72%"},opacity:1,y:0,scale:1,duration:0.5,stagger:0.15,ease:"back.out(1.1)"});
+gsap.set(".ep-deliver-card",{opacity:0,y:20,scale:0.96});
+gsap.to(".ep-deliver-card",{scrollTrigger:{trigger:"#ep-act4",start:"top 72%"},opacity:1,y:0,scale:1,duration:0.45,stagger:0.1,ease:"back.out(1.1)"});
+gsap.set(".ep-nzd-card",{opacity:0,y:20,scale:0.96});
+gsap.to(".ep-nzd-card",{scrollTrigger:{trigger:".ep-nzd-grid",start:"top 80%"},opacity:1,y:0,scale:1,duration:0.45,stagger:0.1,ease:"back.out(1.1)"});
+gsap.from(".ep-calendar",{scrollTrigger:{trigger:".ep-calendar",start:"top 80%"},opacity:0,y:30,duration:0.7,ease:"power3.out"});
+gsap.from(".ep-bridge",{scrollTrigger:{trigger:".ep-bridge",start:"top 80%"},opacity:0,scale:0.95,duration:0.6,ease:"power3.out"});
 
 gsap.set(".family-card",{opacity:0,y:20,scale:0.95});
 gsap.to(".family-card",{scrollTrigger:{trigger:".family-section",start:"top 78%"},opacity:1,y:0,scale:1,duration:0.4,stagger:0.06,ease:"back.out(1.2)"});
